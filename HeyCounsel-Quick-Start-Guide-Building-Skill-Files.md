@@ -47,9 +47,9 @@ This exercise has value on its own. Many attorneys who go through it discover bl
 
 ---
 
-## TIRO: The Structure Your Workflow Already Has
+## The Structure Your Workflow Already Has
 
-You don't need to learn a new framework. TIRO simply names what legal work has always looked like:
+You don't need to learn a new framework. Every legal workflow already follows a natural four-part structure:
 
 | Component | What It Means | Your Skill File |
 |-----------|--------------|-----------------|
@@ -57,7 +57,7 @@ You don't need to learn a new framework. TIRO simply names what legal work has a
 | **Input** | What information flows in? | What the attorney provides: documents, context, parameters |
 | **Requirements** | What rules, logic, and standards apply? | The heart of your skill: workflow steps, decision logic, quality checks |
 | **Output** | What gets delivered? | The finished work product: memo, checklist, opinion letter, classification |
-Every contract clause follows this pattern. Every regulatory provision. Every compliance workflow. TIRO isn't a framework imposed on legal operations — it's a formal description of the structure legal operations already have and always have had. When you write a skill file, you're writing a TIRO specification for your workflow.
+Every contract clause follows this pattern. Every regulatory provision. Every compliance workflow. This isn't a framework imposed on legal operations — it's a formal description of the structure legal operations already have and always have had. When you write a skill file, you're mapping your workflow to this natural structure.
 
 ---
 
@@ -103,17 +103,17 @@ allowed-tools:
 
 ### The Six Sections of an Effective Skill
 
-Map these to TIRO and you'll see the structure is natural:
+Map these to the four components and you'll see the structure is natural:
 
 **1. Role and Context** — Who is the AI acting as? What's the scope?
 
 > You are an experienced commercial attorney reviewing vendor SaaS agreements. You analyze contracts against the firm's standard positions and flag deviations for attorney review.
 
-**2. Input — What the AI Receives** *(TIRO: Input)*
+**2. Input — What the AI Receives**
 
 > The user will provide a vendor SaaS agreement (PDF or text), and optionally the firm's standard positions document.
 
-**3. Workflow Steps** *(TIRO: Requirements)*
+**3. Workflow Steps**
 
 > Step 1: Identify the agreement type and parties.
 > Step 2: Extract key commercial terms (pricing, term, renewal, termination).
@@ -121,16 +121,16 @@ Map these to TIRO and you'll see the structure is natural:
 > Step 4: Flag deviations as Accept / Negotiate / Reject with reasoning.
 > Step 5: Generate a review memo with a summary and detailed findings.
 
-**4. Decision Logic** *(TIRO: Requirements)*
+**4. Decision Logic**
 
 > If indemnification is uncapped: classify as Reject, note standard position is mutual cap at 12 months fees.
 > If governing law is not [preferred jurisdiction]: classify as Negotiate, note preference.
 > If auto-renewal with no termination for convenience: classify as Reject.
-**5. Output Format** *(TIRO: Output)*
+**5. Output Format**
 
 > Produce a review memo with: (1) deal summary, (2) key terms table, (3) deviation analysis with Accept/Negotiate/Reject classifications, (4) recommended redline positions, (5) open items requiring partner review.
 
-**6. Quality Checks** *(TIRO: Requirements — verification layer)*
+**6. Quality Checks**
 
 > Before finalizing, verify: all material provisions are addressed, every deviation has a specific recommendation, the summary accurately reflects the detailed findings, and no provisions were skipped.
 
@@ -138,7 +138,7 @@ Map these to TIRO and you'll see the structure is natural:
 
 ## A Complete Example: NDA Triage
 
-Here's a condensed but functional skill file you could use today. Notice how TIRO maps naturally:
+Here's a condensed but functional skill file you could use today. Notice how the four components map naturally:
 
 ```markdown
 ---
@@ -171,7 +171,7 @@ Provide: risk classification color, key terms summary table, specific flags iden
 Before delivering: confirm every section of the NDA was reviewed, verify the classification matches the most serious flag found, and ensure the recommendation is actionable.
 ```
 
-**TIRO breakdown of this skill:**
+**How this skill maps to the four components:**
 | Component | Where It Lives |
 |-----------|---------------|
 | **Trigger** | `description:` field — "Screens incoming NDAs..." |
@@ -261,7 +261,7 @@ No problem — the goal is to capture your expertise, not test your Git skills. 
 
 1. **Use an existing skill** from the [HeyCounsel Skills Registry](https://github.com/HeyCounsel/legal-ai-skills) to see how it works in practice.
 2. **Pick one workflow** from your own practice.
-3. **Map it to TIRO** — What's the trigger? What comes in? What are the requirements? What goes out?
+3. **Map your workflow** — What's the trigger? What comes in? What are the requirements? What goes out?
 4. **Write your SKILL.md** following the structure in this guide.
 5. **Test it** with a real document.
 6. **Share it** — contribute back to the registry and help build the community.

@@ -45,9 +45,9 @@ Every skill file contains:
 
 ---
 
-## TIRO: The Structure Legal Work Already Has
+## The Structure Legal Work Already Has
 
-TIRO is a formal description of the structure that legal work already has and always has had. Every contract clause, every regulatory provision, every compliance workflow, and every AI pipeline stage follows this pattern:
+Every legal workflow follows a natural four-part structure — and it always has. Every contract clause, every regulatory provision, every compliance workflow, and every AI pipeline stage follows this pattern:
 
 | Component | What It Means | Legal Example |
 |-----------|--------------|---------------|
@@ -55,7 +55,7 @@ TIRO is a formal description of the structure that legal work already has and al
 | **Input** | What information flows in? | The NDA document, counterparty name, deal context |
 | **Requirements** | What rules, logic, and standards apply? | Firm standard positions, jurisdiction-specific rules, risk classification criteria |
 | **Output** | What gets delivered? | A risk-classified review memo with recommended positions |
-When you write a skill file, you are writing a TIRO specification. The Trigger becomes your skill's `description` field — when should the AI activate this workflow? The Input section defines what the attorney provides. The Requirements section is the heart of the skill — your workflow steps, decision logic, and quality checks. The Output section defines what the finished work product looks like.
+When you write a skill file, you're mapping directly to this structure. The Trigger becomes your skill's `description` field — when should the AI activate this workflow? The Input section defines what the attorney provides. The Requirements section is the heart of the skill — your workflow steps, decision logic, and quality checks. The Output section defines what the finished work product looks like.
 
 This isn't a new way of thinking about legal work. It's a precise way of describing what experienced attorneys already do instinctively. A skill file just makes it explicit and portable.
 
@@ -116,7 +116,7 @@ We are actively seeking skill file contributions across all practice areas. If y
 The fastest path from idea to working skill:
 
 1. **Pick one workflow** you do repeatedly — the more specific, the better.
-2. **Map it to TIRO** — What triggers this work? What comes in? What rules and logic apply? What gets delivered?
+2. **Map your workflow** — What triggers this work? What comes in? What rules and logic apply? What gets delivered?
 3. **Write it out** as a `SKILL.md` file using the [Quick Start Guide](HeyCounsel-Quick-Start-Guide-Building-Skill-Files.md).
 4. **Test it** with a real document or matter.
 5. **Share it** by submitting a pull request to this repository.

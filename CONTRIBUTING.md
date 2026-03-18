@@ -55,7 +55,7 @@ You'll be credited as the author, and you can iterate on the skill after publica
 
 **Attorney-ready output.** The skill should produce draft work product that a licensed attorney can meaningfully review, revise, and approve — not raw data dumps.
 
-**TIRO structure.** The best skills clearly define their Trigger (when to activate), Input (what's provided), Requirements (workflow logic and decision criteria), and Output (what gets delivered). See the [Quick Start Guide](HeyCounsel-Quick-Start-Guide-Building-Skill-Files.md) for details.
+**Clear four-part structure.** The best skills clearly define their Trigger (when to activate), Input (what's provided), Requirements (workflow logic and decision criteria), and Output (what gets delivered). See the [Quick Start Guide](HeyCounsel-Quick-Start-Guide-Building-Skill-Files.md) for details.
 
 ---
 
