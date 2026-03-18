@@ -55,6 +55,7 @@ Every legal workflow follows a natural four-part structure — and it always has
 | **Input** | What information flows in? | The NDA document, counterparty name, deal context |
 | **Requirements** | What rules, logic, and standards apply? | Firm standard positions, jurisdiction-specific rules, risk classification criteria |
 | **Output** | What gets delivered? | A risk-classified review memo with recommended positions |
+
 When you write a skill file, you're mapping directly to this structure. The Trigger becomes your skill's `description` field — when should the AI activate this workflow? The Input section defines what the attorney provides. The Requirements section is the heart of the skill — your workflow steps, decision logic, and quality checks. The Output section defines what the finished work product looks like.
 
 This isn't a new way of thinking about legal work. It's a precise way of describing what experienced attorneys already do instinctively. A skill file just makes it explicit and portable.
@@ -79,9 +80,10 @@ Skill files close that gap. They encode the kind of institutional knowledge that
 
 ### Available Skills
 
-| Skill | Practice Area | Jurisdiction | Status |
-|-------|--------------|-------------|--------|
-| [TX Title Analysis](skills/tx-title-analysis/) | Real Estate | Texas | Production-ready |
+| Skill | Practice Area | Jurisdiction | Version |
+|-------|--------------|-------------|---------|
+| [TX Title Analysis](skills/tx-title-analysis/) | Real Estate | Texas | v1.0 |
+
 **TX Title Analysis** performs residential and commercial title examination — analyzes commitments, recorded instruments, surveys, HOA documents, and searches. Outputs draft title opinion letters, requirements checklists, and exception cure guidance for attorney review. Covers Schedule B exceptions, homestead and community property analysis, mineral rights evaluation, and T-1/T-7/T-19 form guidance.
 
 ### Wanted: Your Practice Area
@@ -111,6 +113,7 @@ We are actively seeking skill file contributions across all practice areas. If y
 2. Paste its contents into your platform's system prompt or custom instructions.
 3. Upload any supporting reference files as needed.
 4. Start working — the AI will follow the skill's methodology.
+
 ### Build Your Own Skill
 
 The fastest path from idea to working skill:
@@ -143,6 +146,7 @@ You are not locked into any single vendor. Build a skill once, use it everywhere
 ## The HeyCounsel Hackathon
 
 HeyCounsel is building toward a hands-on hackathon where legal professionals and technologists collaborate to create skill files for real practice areas. Whether you're an attorney who wants AI to follow your specific workflow or a developer who wants to encode legal expertise, this is an opportunity to build something immediately useful — and contribute it to a community that will put it to work.
+
 The hackathon reflects a core HeyCounsel principle: independent lawyers are stronger together. Instead of everyone solving the same problems in isolation, we build shared tools and lift the whole community.
 
 Stay connected through [HeyCounsel](https://www.heycounsel.com) for hackathon details as they develop.
@@ -173,6 +177,7 @@ This registry grows through contributions from practicing attorneys and legal pr
 3. Include a `SKILL.md` with clear workflow logic, decision criteria, and quality checks.
 4. Add supporting reference materials and templates as needed.
 5. Submit a pull request describing the practice area, jurisdiction, and use case.
+
 See the full [Contributing Guide](CONTRIBUTING.md) for detailed submission standards.
 
 ### Option 2: Submit via Form (Non-Technical)
@@ -180,18 +185,6 @@ See the full [Contributing Guide](CONTRIBUTING.md) for detailed submission stand
 Not comfortable with GitHub? No problem. Use the **[HeyCounsel Skill Submission Form](https://www.heycounsel.com)** to contribute without touching any code. Describe your workflow, upload your SKILL.md (or even a rough draft), and the HeyCounsel team will handle the formatting, review, and publication to the registry on your behalf.
 
 You can also email your skill file or workflow description directly to the HeyCounsel team through the community platform. The goal is to capture your expertise — we'll take care of the technical details.
-
-### Skill Ideas We'd Love to See
-
-- Contract review SOPs (vendor agreements, employment, SaaS)
-- Discovery workflow automation (interrogatories, RFPs, RFAs)
-- Entity formation checklists (by state)
-- Immigration case management workflows
-- IP prosecution and portfolio management
-- Regulatory compliance frameworks
-- Litigation hold and e-discovery protocols
-- Client intake and conflict checking
-- Real estate closings (additional jurisdictions)
 
 ---
 
@@ -202,6 +195,7 @@ You can also email your skill file or workflow description directly to the HeyCo
 - **Legal operations professionals** — Create scalable, auditable AI tooling for your organization.
 - **Law students and new attorneys** — Learn from experienced practitioners' workflows while building practical AI skills.
 - **Legal technologists** — Encode domain expertise into portable, platform-agnostic instruction sets.
+
 ---
 
 ## Disclaimer
@@ -217,8 +211,9 @@ Skill files are **tools for legal professionals**, not substitutes for legal jud
 - [The Complete Guide to Building Skills for Claude](References/The-Complete-Guide-to-Building-Skill-for-Claude%20(1).pdf) — Anthropic's comprehensive reference
 - [Claude Skills Documentation](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/skills) — Official technical reference
 - [Anthropic Skills Examples](https://github.com/anthropics/skills) — Public skills repository from Anthropic
-- [Code & Counsel Repository](https://github.com/cbrown1515/Public-Code-Counsel-Legal-Skills) — The original repo that started this project
 
 ---
 
 **Built by the [HeyCounsel](https://www.heycounsel.com) community** — independent lawyers building shared tools for modern practice.
+
+*Curated by Code & Counsel, PLLC*
