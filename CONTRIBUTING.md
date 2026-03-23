@@ -17,15 +17,19 @@ Anyone — HeyCounsel members, attorneys, legal operations professionals, law st
 If you're comfortable with Git and GitHub:
 
 1. **Fork** this repository.
-2. **Create a skill directory** using kebab-case naming: `ca-purchase-agreement-review/`, not `CA Purchase Agreement Review/`.
+2. **Create a skill directory** inside the `skills/` folder using kebab-case naming: `skills/ca-purchase-agreement-review/`, not `CA Purchase Agreement Review/`.
 3. **Add your files** following this structure:
 
 ```
-your-skill-name/
-├── SKILL.md              # Required — core instructions
-├── reference/            # Optional — checklists, statutes, examples
-└── templates/            # Optional — output format templates
+skills/
+└── your-skill-name/
+    ├── SKILL.md              # Required — core instructions
+    ├── skill.yml             # Required — registry metadata (see template)
+    ├── reference/            # Optional — checklists, statutes, examples
+    └── templates/            # Optional — output format templates
 ```
+
+A `skill.yml` template is available at [`skills/SKILL_TEMPLATE/skill.yml`](skills/SKILL_TEMPLATE/skill.yml). Copy it into your skill folder and fill in the fields. The GitHub Action uses this file to automatically add your skill to the registry table when your PR is merged.
 
 4. **Submit a pull request** with a clear description including:
    - Practice area and jurisdiction (if applicable)
@@ -59,7 +63,9 @@ You'll be credited as the author, and you can iterate on the skill after publica
 
 ---
 
-## SKILL.md Requirements
+## Required Files
+
+### SKILL.md (Core Instructions)
 
 Your `SKILL.md` must include:
 - **YAML frontmatter** with `name` and `description` fields (see [Quick Start Guide](HeyCounsel-Quick-Start-Guide-Building-Skill-Files.md))
@@ -69,6 +75,10 @@ Your `SKILL.md` must include:
 - **Quality checks** — self-review criteria before delivering output
 
 Your `description` field must include both what the skill does and when to use it (trigger phrases). This is how AI platforms decide when to activate your skill.
+
+### skill.yml (Registry Metadata)
+
+Every skill must include a `skill.yml` file with these fields: `name`, `practice_area`, `jurisdiction`, `version`, `author`, and `description`. When your PR is merged, a GitHub Action reads this file and automatically updates the Skills Registry table in the README. See the [template](skills/SKILL_TEMPLATE/skill.yml) for the exact format.
 
 ---
 

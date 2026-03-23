@@ -80,11 +80,14 @@ Skill files close that gap. They encode the kind of institutional knowledge that
 
 ### Available Skills
 
+<!-- SKILLS_REGISTRY_START -->
 | Skill | Practice Area | Jurisdiction | Version |
 |-------|--------------|-------------|---------|
-| [TX Title Analysis](skills/tx-title-analysis/) | Real Estate | Texas | v1.0 |
+| [TX Title Analysis](skills/tx-title-analysis/) | Real Estate | Texas | v2.1 |
 
-**TX Title Analysis** performs residential and commercial title examination — analyzes commitments, recorded instruments, surveys, HOA documents, and searches. Outputs draft title opinion letters, requirements checklists, and exception cure guidance for attorney review. Covers Schedule B exceptions, homestead and community property analysis, mineral rights evaluation, and T-1/T-7/T-19 form guidance.
+**TX Title Analysis** — Residential and commercial title examination — analyzes commitments, recorded instruments, surveys, HOA documents, and searches. Outputs draft title opinion letters, requirements checklists, and exception cure guidance for attorney review.
+
+<!-- SKILLS_REGISTRY_END -->
 
 ### Wanted: Your Practice Area
 
