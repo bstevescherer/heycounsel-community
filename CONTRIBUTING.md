@@ -40,7 +40,7 @@ A `skill.yml` template is available at [`skills/SKILL_TEMPLATE/skill.yml`](skill
 
 Not comfortable with GitHub? No problem. The goal is to capture your expertise — we'll handle the technical details.
 
-**Use the [HeyCounsel Skill Submission Form](https://www.heycounsel.com):**
+**Drop your new SKILL.md file in [the #vibecode_lab Slack channel](https://heycounsel.slack.com/archives/C0AFC9ASL2D) and tag Christian Brown and Victor Wang:**
 
 1. Write your SKILL.md file (or even a rough draft of your workflow — bullet points are fine to start).
 2. Upload it through the form, or email it directly through the HeyCounsel community platform.
