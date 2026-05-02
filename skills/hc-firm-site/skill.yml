@@ -1,0 +1,9 @@
+name: HC Firm Site Builder
+practice_area: Law Firm Management
+jurisdiction: Multi
+version: "1.0"
+author: Brian Scherer — Lovable Law / HeyCounsel
+description: >
+  Complete toolkit for building a professional law firm website using Claude Code.
+  Four commands covering setup, page creation, and pre-launch audit. Designed for
+  attorneys with no coding background. Based on the Lovable Law build (lovablelaw.com).
