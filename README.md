@@ -86,12 +86,15 @@ Skill files close that gap. They encode the kind of institutional knowledge that
 | [Matter Journal](skills/matter-journal/) | Practice Management | Multi | v1.0 |
 | [Redline Emailer](skills/redline-emailer/) | Contracts | Multi | v1.0 |
 | [TX Title Analysis](skills/tx-title-analysis/) | Real Estate | Texas | v2.1 |
+| [HC Firm Site Builder](skills/hc-firm-site/) | Law Firm Management | Multi | v1.0 |
 
 **Matter Journal** — Manages client matter journals — persistent case files that give AI full context on every client and matter. Creates, loads, and logs to per-matter markdown journals for seamless context across sessions.
 
 **Redline Emailer** — Translates contract redlines into client-ready or opposing-counsel emails. Accepts tracked-changes .docx, redlined PDFs, or verbal descriptions of changes and produces tone-matched, copy-paste-ready cover emails.
 
 **TX Title Analysis** — Residential and commercial title examination — analyzes commitments, recorded instruments, surveys, HOA documents, and searches. Outputs draft title opinion letters, requirements checklists, and exception cure guidance for attorney review.
+
+**HC Firm Site Builder** — Complete toolkit for building a professional law firm website using Claude Code. Four commands covering setup, page creation, and pre-launch audit (16 checks). Includes the Law Firm Website Guide covering StoryBrand copy, SEO/AEO, bar compliance, and WCAG accessibility. Designed for attorneys with no coding background. Based on the Lovable Law build (lovablelaw.com).
 
 <!-- SKILLS_REGISTRY_END -->
 
