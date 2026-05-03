@@ -292,15 +292,15 @@ to a colleague. Claude will organize it automatically.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-Ask each group with AskUserQuestion. Wait for the answer to each group before moving to the next.
+Ask each group conversationally — output the question as a normal message and wait for the response before moving to the next group. Do not use AskUserQuestion for these — the questions are too detailed for a popup dialog.
 
 ---
 
 **Group 1 of 5 — The Firm**
 
-Use AskUserQuestion:
-- Question: """
-Please answer these questions about your firm:
+Say:
+
+"Let's start with the basics. Please answer these questions about your firm:
 
 1. What is your firm's full name?
 2. What city and state is the firm based in?
@@ -309,16 +309,17 @@ Please answer these questions about your firm:
 4. Do you have a tagline or short description of what makes your firm different?
    (If not, just say "none" — we can develop this together)
 
-You can answer as a numbered list or in any format that's easy for you.
-"""
+You can answer as a numbered list or just talk through them however is easiest."
+
+Wait for the response, then continue.
 
 ---
 
 **Group 2 of 5 — The Team**
 
-Use AskUserQuestion:
-- Question: """
-Now tell me about your team. For each attorney, please share:
+Say:
+
+"Now tell me about your team. For each attorney, please share:
 
 - Full name and title (e.g., Managing Partner, Senior Associate)
 - Bar admission (state and year, e.g., "New York State Bar, 2015")
@@ -330,18 +331,19 @@ For any non-attorney staff you want featured on the site (e.g., operations, inta
 - Full name and title
 - A brief description of their role
 
-If it's just you for now, that's completely fine — just describe yourself.
-"""
+If it's just you for now, that's completely fine — just describe yourself."
+
+Wait for the response, then continue.
 
 ---
 
 **Group 3 of 5 — Your Clients**
 
-Use AskUserQuestion:
-- Question: """
-Help me understand who you serve:
+Say:
 
-1. Who is your ideal client? 
+"Help me understand who you serve:
+
+1. Who is your ideal client?
    (Be specific: e.g., "Series A and B startups in tech", "founder-owned businesses with $5M–$50M in revenue", "PE-backed companies going through M&A")
 
 2. What is the main legal problem they come to you to solve?
@@ -350,16 +352,17 @@ Help me understand who you serve:
    (e.g., cost surprises, slow response times, getting passed to junior associates)
 
 4. How do clients usually find you right now?
-   (referrals, LinkedIn, former colleagues, etc.)
-"""
+   (referrals, LinkedIn, former colleagues, etc.)"
+
+Wait for the response, then continue.
 
 ---
 
 **Group 4 of 5 — Positioning and Pricing**
 
-Use AskUserQuestion:
-- Question: """
-A few questions about how you position the firm:
+Say:
+
+"A few questions about how you position the firm:
 
 1. Do you offer flat fees, hourly billing, or both?
    If flat fees: what are some examples with prices?
@@ -369,16 +372,17 @@ A few questions about how you position the firm:
 2. What do you do differently from other firms your clients might consider?
 
 3. How would you describe the firm's tone and personality?
-   (e.g., "formal and precise", "direct and no-nonsense", "approachable and plain-speaking")
-"""
+   (e.g., "formal and precise", "direct and no-nonsense", "approachable and plain-speaking")"
+
+Wait for the response, then continue.
 
 ---
 
 **Group 5 of 5 — Design and Existing Presence**
 
-Use AskUserQuestion:
-- Question: """
-Last group — a few questions about the look and feel:
+Say:
+
+"Last group — a few questions about the look and feel:
 
 1. Do you have any websites you admire visually?
    These don't have to be law firms — any industry.
@@ -392,9 +396,9 @@ Last group — a few questions about the look and feel:
 4. Do you have professional headshots ready for the attorneys?
    (Yes / No / Some of them)
 
-5. Is there anything else about the firm, your clients, or the website that you
-   want Claude to know before we start building?
-"""
+5. Is there anything else about the firm, your clients, or the website that you want Claude to know before we start building?"
+
+Wait for the response, then continue to Step 7.
 
 ---
 
