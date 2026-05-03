@@ -196,14 +196,17 @@ reason — here's what they are and why:
                  it live. Free tier covers everything
                  a firm website needs.
 
-  Supabase       A database that stores every contact
-                 form submission. So even if an email
-                 notification gets missed, your leads
-                 are always saved somewhere safe.
+  Supabase       Stores every contact form submission
+                 as a lead record. If you already use
+                 a CRM you'd prefer to connect instead,
+                 let us know.
 
-  Resend         Sends you an email notification the
-                 moment someone fills out your contact
-                 form. Simple, reliable, free to start.
+  Resend         Sends an email notification the moment
+                 someone submits your contact form. If
+                 you use a CRM or matter management
+                 platform with built-in email automation,
+                 let us know — we may be able to
+                 skip this.
 
 This stack is battle-tested, free at the scale of a
 law firm website, and produces a fast, professional
