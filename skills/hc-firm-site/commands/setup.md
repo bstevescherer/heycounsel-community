@@ -5,6 +5,7 @@ allowed-tools:
   - Bash
   - Read
   - Write
+  - WebFetch
   - AskUserQuestion
 ---
 
@@ -25,7 +26,186 @@ After this skill completes, run:
 
 <process>
 
-## Step 1 — Check if GSD is installed
+## Step 1 — GitHub, Vercel, and connection walkthrough
+
+Show this message:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Before we build — let's connect your project
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your website needs three things in place before we start:
+
+  ☐ A GitHub repository   — where your code lives
+  ☐ A Vercel project      — where your site publishes to
+  ☐ The two connected     — so every push goes live automatically
+
+We'll walk through each one now. If you've already done
+any of these steps, just confirm and we'll move on.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+---
+
+### 1a — GitHub account and repository
+
+Show this message:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Step 1 of 3 — GitHub
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GitHub is where your website's code lives. Think of
+it as a Google Drive for code — every change is saved,
+versioned, and backed up automatically.
+
+If you don't have a GitHub account yet:
+  1. Go to github.com
+  2. Click "Sign up" (it's free)
+  3. Create your account
+
+Once you're logged in, create a new repository:
+  1. Click the + in the top-right corner
+  2. Select "New repository"
+  3. Name it something like: my-firm-website
+  4. Set visibility to Private
+  5. Check "Add a README file"
+  6. Click "Create repository"
+
+You should now see a page with your new empty repo.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  One more thing while you're here — connect GitHub
+  to Claude Code
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This lets Claude push code to GitHub on your behalf
+so you never have to type passwords or tokens. It
+takes about 30 seconds and you only do it once.
+
+  1. In Claude Code, click the plug icon (⚡) in the
+     bottom-left corner
+  2. Find GitHub in the list and click Connect
+  3. Follow the prompts to authorize
+
+Once connected, Claude can push your code to GitHub
+directly — no terminal passwords required.
+```
+
+Use AskUserQuestion:
+- Question: "Do you have a GitHub account, a new repository, and GitHub connected to Claude Code?"
+- Options: ["Yes, all three done", "I need help — something went wrong"]
+
+**If they need help:** Ask them to describe what happened and troubleshoot before continuing.
+
+**If ready:** Continue to 1b.
+
+---
+
+### 1b — Vercel account and project
+
+Show this message:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Step 2 of 3 — Vercel
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Vercel is what publishes your site to the internet.
+Every time you push code to GitHub, Vercel automatically
+deploys it live — usually within 60 seconds.
+
+Create your Vercel account:
+  1. Go to vercel.com
+  2. Click "Sign Up"
+  3. Choose "Continue with GitHub" — this links the
+     two accounts automatically
+
+Once you're in, create a new project:
+  1. Click "Add New" → "Project"
+  2. Find your new GitHub repository in the list
+     and click "Import"
+  3. Leave all the default settings as-is
+  4. Click "Deploy"
+
+Vercel will build the site (it's mostly empty right
+now — that's fine). You'll get a live URL like:
+  my-firm-website.vercel.app
+
+That URL is your site. It will update automatically
+every time you push code.
+```
+
+Use AskUserQuestion:
+- Question: "Do you have a Vercel project deployed and a live URL?"
+- Options: ["Yes, I can see my live URL", "I need help — something went wrong"]
+
+**If they need help:** Ask them to describe what happened and troubleshoot before continuing.
+
+**If ready:** Continue to 1c.
+
+---
+
+### 1c — Connect your local folder to GitHub
+
+Show this message:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Step 3 of 3 — Connect to GitHub
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Now we need to connect this folder to the GitHub
+repository you just created.
+
+We're not uploading anything yet — we're just telling
+this folder "when we're ready to push code, send it
+here." The actual build happens first, and we'll do
+the first push together once there's something worth
+committing.
+
+I can run the two setup commands for you. All I need
+is your GitHub repository URL — you can find it on
+your repo page by clicking the green "Code" button
+and copying the HTTPS link. It looks like:
+
+  https://github.com/your-username/your-repo-name.git
+```
+
+Ask conversationally:
+
+"What's the GitHub URL for your new repository? Once you share it, I'll run the setup commands."
+
+Wait for the URL. Then ask:
+
+"Ready? I'll run `git init` and connect this folder to your GitHub repo."
+
+Use AskUserQuestion:
+- Question: "Ready for me to connect this folder to GitHub?"
+- Options: ["Yes, run it", "Wait — I have a question"]
+
+**If they have a question:** Answer it, then re-confirm before continuing.
+
+**If yes:** Run:
+```bash
+git init
+git remote add origin THEIR_URL
+```
+
+Check the output. If successful, show:
+
+```
+✓ GitHub, Vercel, and your local folder are all set.
+  Your site is live and connected. Let's build it.
+```
+
+**If an error occurs:** Explain what went wrong in plain English and troubleshoot before continuing.
+
+---
+
+## Step 2 — Check if GSD is installed
 
 Run this check:
 
@@ -49,7 +229,7 @@ Continue to Step 2.
 
 ---
 
-## Step 2 — Install GSD (only if not installed)
+## Step 3 — Install GSD (only if not installed)
 
 GSD is not installed. Explain it and walk through installation before continuing.
 
@@ -106,10 +286,13 @@ fi
   ✓ GSD installed successfully (version X.X.X)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-One more step: restart Claude Code so it picks up
-the new GSD commands.
+One more step: fully quit and reopen Claude Code so
+it picks up the new GSD commands.
 
-  → Close this window
+  → Fully quit Claude Code
+    Mac: press Cmd+Q
+    Windows: right-click the taskbar icon → Quit
+    (just closing the window is not enough)
   → Reopen Claude Code in your project folder
   → Run /hc-firm-site:setup again to continue
 
@@ -132,7 +315,7 @@ Then restart Claude Code and run /hc-firm-site:setup again.
 
 ---
 
-## Step 3 — Check project state
+## Step 4 — Check project state
 
 Check if this project already has a FIRM_BRIEF.md:
 
@@ -147,87 +330,18 @@ Check if this project already has a FIRM_BRIEF.md:
   - "Cancel — keep what I have"
 
 If cancel: exit.
-If start fresh: continue to Step 4.
+If start fresh: continue to Step 5.
 
-**If NEW:** Continue to Step 4.
+**If NEW:** Continue to Step 5.
 
 ---
 
-## Step 4 — Create project folders
+## Step 5 — Create project folders
 
 ```bash
 mkdir -p .planning
 mkdir -p .claude
 ```
-
----
-
-## Step 5 — Confirm the tech stack
-
-Show this message:
-
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Your tech stack
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-We have a recommended set of tools for building your
-firm website. Each one was chosen for a specific
-reason — here's what they are and why:
-
-  Astro 6        Builds the site. Produces pages that
-                 load extremely fast and score well on
-                 Google — critical for SEO. Purpose-
-                 built for content sites like this one.
-
-  Tailwind CSS   Handles all the styling (colors,
-                 fonts, spacing, layout). Works hand-
-                 in-hand with Astro and keeps the
-                 design consistent across every page.
-
-  GitHub         Your version control system — think
-                 of it as a "save history" for every
-                 change made to your site. Free, and
-                 connects directly to Vercel.
-
-  Vercel         Publishes your site to the internet.
-                 Every time you push a change to
-                 GitHub, Vercel automatically deploys
-                 it live. Free tier covers everything
-                 a firm website needs.
-
-  Supabase       Stores every contact form submission
-                 as a lead record. If you already use
-                 a CRM you'd prefer to connect instead,
-                 let us know.
-
-  Resend         Sends an email notification the moment
-                 someone submits your contact form. If
-                 you use a CRM or matter management
-                 platform with built-in email automation,
-                 let us know — we may be able to
-                 skip this.
-
-This stack is battle-tested, free at the scale of a
-law firm website, and produces a fast, professional
-result. We strongly recommend using all of it as-is.
-```
-
-Use AskUserQuestion:
-- Question: "Would you like to use this stack as recommended, or swap anything out? If you'd like to make changes, describe what you'd prefer and why — we'll adjust before building."
-- Options:
-  - "Use the recommended stack — let's go"
-  - "I'd like to swap something out"
-
-**If they want to swap something out:**
-Ask them what they'd like to change and why. Accept their preference, note the substitution, and update the CLAUDE.md in Step 8 to reflect it. Continue to Step 6.
-
-**If they accept the recommended stack:**
-Show:
-```
-✓ Stack confirmed. All six tools will be used.
-```
-Continue to Step 6.
 
 ---
 
@@ -280,20 +394,37 @@ The better you describe your clients' problems and
 fears, the better the copy will be.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  💡 Tip: use dictation to answer faster
+  💡 Tip: share your existing site or HeyCounsel profile to go faster
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Speaking your answers out loud is 3–4x faster than
-typing and tends to capture more useful detail.
+If you already have a website or a HeyCounsel profile,
+share the URL(s) and I'll read them first. I'll
+pre-fill everything I can find, then only ask about
+the gaps. This usually cuts the intake in half.
 
-  Mac:           Press Fn twice to start dictating
-  iPhone/iPad:   Tap the microphone icon on the keyboard
-  Windows:       Press Win + H
+Examples of what to share:
+  → Your existing firm website (any platform)
+  → Your HeyCounsel profile page
+  → A LinkedIn page for the firm or its attorneys
+  → A practice area page on a previous firm's site
 
-Just talk through each question as if explaining it
-to a colleague. Claude will organize it automatically.
+If you don't have any of these, no problem — we'll
+just go through the questions together.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+Before starting Group 1, ask:
+
+"Do you have an existing website, HeyCounsel profile, or LinkedIn page for the firm I can read first? Share any URLs you have, or just say 'none' and we'll go through the questions together."
+
+**If they share URLs:**
+- Use WebFetch to read each URL
+- Pull out: firm name, location, practice areas, tagline, attorney names/titles/bios, ideal clients, fee info, existing copy/tone, design references
+- Note what was found and what's still missing
+- Show the user a brief summary: "I found [X, Y, Z] from your site. I still need to ask about [missing items]."
+- Skip questions in the groups below where you already have a confident answer; ask only the remaining ones
+
+**If they say none:** Continue with all five groups as written below.
 
 Ask each group conversationally — output the question as a normal message and wait for the response before moving to the next group. Do not use AskUserQuestion for these — the questions are too detailed for a popup dialog.
 
@@ -301,7 +432,7 @@ Ask each group conversationally — output the question as a normal message and 
 
 **Group 1 of 5 — The Firm**
 
-Say:
+Say (skip any items you already pulled from their URLs):
 
 "Let's start with the basics. Please answer these questions about your firm:
 
@@ -405,7 +536,226 @@ Wait for the response, then continue to Step 7.
 
 ---
 
-## Step 7 — Write FIRM_BRIEF.md
+## Step 7 — Confirm the tech stack
+
+Show this message:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Let's confirm your tech stack
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You've already set up GitHub and Vercel — two of the
+four tools we'll use to build your site.
+
+I'll walk you through all four, explain what each one
+does and why we chose it, and confirm each one before
+we move on.
+
+One note on the contact form: we'll figure out how
+form submissions get stored and emailed to you when
+GSD reaches that phase of the build. There are several
+good options and the right one depends on what you
+already use to manage client intake.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Walk through each tool individually:
+
+---
+
+**Tool 1 of 4 — Astro**
+
+Show this message:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Tool 1 of 4 — Astro
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+What it is:
+Astro is the framework that builds your website —
+it assembles all your pages, components, and content
+into the final HTML that visitors see in their browser.
+
+Think of it as the assembly line that takes everything
+Claude writes and turns it into an actual website.
+
+Why Astro for a law firm website:
+  → Pages load extremely fast, which matters directly
+    for Google rankings. Slow sites rank lower.
+  → Purpose-built for content-heavy sites: practice
+    area pages, attorney bios, blog posts, service
+    descriptions — Astro handles all of this cleanly.
+  → The code it produces is organized and predictable,
+    which means Claude can reliably pick up where it
+    left off in every new session.
+  → Free and open source. No license fees, ever.
+
+The most common alternative is WordPress. WordPress
+is slower, requires constant plugin updates, gets
+hacked more often, and is significantly harder for
+Claude to modify reliably. Astro was the right call.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Use AskUserQuestion:
+- Question: "Use Astro to build the site?"
+- Options: ["Yes, use Astro", "I have a question about this"]
+
+**If they have a question:** Answer it, then re-confirm before continuing.
+**If yes:** Continue to Tool 2.
+
+---
+
+**Tool 2 of 4 — Tailwind CSS**
+
+Show this message:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Tool 2 of 4 — Tailwind CSS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+What it is:
+Tailwind is a styling system — it controls everything
+visual about your site. Colors, fonts, spacing,
+layout, hover effects, how it looks on mobile.
+Everything a visitor sees is styled with Tailwind.
+
+If Astro is the structure of your building, Tailwind
+is the interior design firm.
+
+Why Tailwind:
+  → Works hand-in-hand with Astro. The two tools were
+    designed to be used together.
+  → Styles live right next to the elements they affect,
+    so there's nothing to hunt down when you want to
+    make a change.
+  → Makes visual changes easy to describe to Claude:
+    "make the header darker" or "add more space between
+    sections" — Claude can implement those precisely.
+  → Your entire design is controlled by one consistent
+    set of rules. Nothing looks accidentally different
+    from page to page.
+  → Free and open source.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Use AskUserQuestion:
+- Question: "Use Tailwind CSS for all the styling?"
+- Options: ["Yes, use Tailwind", "I have a question about this"]
+
+**If they have a question:** Answer it, then re-confirm before continuing.
+**If yes:** Continue to Tool 3.
+
+---
+
+**Tool 3 of 4 — GitHub**
+
+Show this message:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Tool 3 of 4 — GitHub  (already set up ✓)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You created your GitHub repository in Step 1 — so
+this is already in place. Here's a bit more on what
+it actually does once we start building:
+
+GitHub stores every version of your site's code,
+going back to the very first file. Think of it as
+a permanent undo history for your entire website.
+
+  → Every change Claude makes gets "committed" — that's
+    like pressing Save, except it also records what
+    changed, when, and why. You can always see the
+    full history.
+  → If something breaks or you change your mind, you
+    can roll back to any previous version. Nothing is
+    ever truly lost.
+  → Your entire website lives here, safely backed up,
+    separate from your laptop. If your computer dies,
+    the site is fine.
+  → Connects directly to Vercel — every push triggers
+    an automatic deployment. No manual uploads, ever.
+  → Free for private repositories.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Use AskUserQuestion:
+- Question: "Continue with GitHub for version control?"
+- Options: ["Yes, confirmed", "I have a question about this"]
+
+**If they have a question:** Answer it, then re-confirm before continuing.
+**If yes:** Continue to Tool 4.
+
+---
+
+**Tool 4 of 4 — Vercel**
+
+Show this message:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Tool 4 of 4 — Vercel  (already set up ✓)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You created your Vercel project in Step 1 — already
+in place. Here's more on what it does throughout
+the build:
+
+Vercel is your hosting platform — it's what makes
+your site accessible to the public on the internet,
+and it handles a lot more than just serving pages.
+
+  → The moment you push a change to GitHub, Vercel
+    automatically picks it up and publishes it live.
+    Usually within 60 seconds. No manual steps.
+  → When you're ready for a real domain (e.g.
+    smithlaw.com), you'll point it to Vercel and it
+    routes all visitors to your site automatically.
+  → Runs on a global network of servers, so your site
+    loads fast for visitors anywhere in the world.
+  → Handles all the technical infrastructure — SSL
+    certificates (the padlock in the browser bar),
+    caching, performance optimization — automatically.
+  → Vercel is also where you'll store secret API keys
+    (passwords for third-party tools like your contact
+    form provider). They live here, safely separate
+    from your code, so they never end up on GitHub.
+  → Free tier covers everything a law firm website
+    needs, including custom domains.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Use AskUserQuestion:
+- Question: "Continue with Vercel for hosting and deployment?"
+- Options: ["Yes, confirmed", "I have a question about this"]
+
+**If they have a question:** Answer it, then re-confirm before continuing.
+**If yes:** Show this and continue to Step 8:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✓ Tech stack confirmed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Astro        ✓  builds the site
+  Tailwind     ✓  styles it
+  GitHub       ✓  version control
+  Vercel       ✓  hosting and deployment
+
+  Contact form integration will be decided when GSD
+  reaches that phase — we'll review your options and
+  choose the right one for how you manage intake.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+---
+
+## Step 8 — Write FIRM_BRIEF.md
 
 Using all the answers collected, write `.planning/FIRM_BRIEF.md` in this format:
 
@@ -512,7 +862,7 @@ blog system, contact form, SEO, and security — based on what's here.*
 
 ---
 
-## Step 8 — Copy LAW_FIRM_WEBSITE_GUIDE.md into the project
+## Step 9 — Copy LAW_FIRM_WEBSITE_GUIDE.md into the project
 
 Read the guide from the skill's own folder and write it into the project:
 
@@ -524,7 +874,7 @@ If the copy fails for any reason, note it but continue — it's not a blocker.
 
 ---
 
-## Step 9 — Write .claude/CLAUDE.md
+## Step 10 — Write .claude/CLAUDE.md
 
 Write `.claude/CLAUDE.md` with the following content, substituting the firm name and practice areas from the brief:
 
@@ -563,14 +913,19 @@ Every content, copy, and SEO decision should be consistent with these documents.
 
 ## Tech Stack — Already Decided
 
-Do not suggest alternatives. The stack for this project is:
+Do not suggest alternatives to the core stack:
 
 - **Astro 6** — builds the site
 - **Tailwind CSS v4** — styles it
 - **GitHub** — version control
-- **Vercel** — deployment
-- **Supabase** — contact form lead storage
-- **Resend** — email notifications
+- **Vercel** — deployment and hosting
+
+**Contact form integration is TBD.** When GSD reaches
+the contact form phase, present the attorney with their
+options (e.g. Supabase + Resend, Formspree, Netlify Forms,
+direct email via SMTP, CRM webhook). Ask what they currently
+use to manage client intake — the right tool depends on their
+existing workflow. Do not assume Supabase or Resend.
 
 ---
 
@@ -621,7 +976,7 @@ This file is course documentation for the HeyCounsel community.
 
 ---
 
-## Step 10 — Show completion summary
+## Step 11 — Show completion summary
 
 Display this message:
 
