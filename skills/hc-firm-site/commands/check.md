@@ -343,7 +343,9 @@ git ls-files | grep "^\.env" | grep -v "\.env\.example" || echo "CLEAN — no .e
 
 ---
 
-### Check M — Supabase Row Level Security
+### Check M — Supabase Row Level Security (only if Supabase is used)
+
+First determine whether this project uses Supabase at all (look for `@supabase` in package.json or `supabase` references in the contact form code). If the contact form uses a different provider (Web3Forms, Formspree, etc.), mark this check **N/A — no database in use** and move on.
 
 ```bash
 # Check for RLS in setup documentation or SQL files
@@ -523,7 +525,6 @@ SECURITY
   Next steps:
   • Run `npm run build` one final time to confirm no errors
   • Preview locally with `npm run preview`
-  • Run /gsd:verify-work for a final overall code review
   • Deploy to Vercel when ready
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
