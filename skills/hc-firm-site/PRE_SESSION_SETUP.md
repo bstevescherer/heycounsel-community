@@ -2,9 +2,9 @@
 
 **Build Your Firm Website with Claude Code · HeyCounsel**
 
-Please complete these four steps before our session. Total time: about 20–30 minutes.
-They're all account setups — nothing technical. If anything goes wrong, don't worry:
-note where you got stuck and we'll fix it together at the start of the session.
+Please complete these four steps before our session. Total time: about 30 minutes.
+Nothing technical — just accounts and a few clicks. If anything goes wrong, don't
+worry: note where you got stuck and we'll fix it together at the start of the session.
 
 ---
 
@@ -26,42 +26,52 @@ and confirm you get a reply.
 
 ---
 
-## Step 2 — GitHub (5 min)
+## Step 2 — GitHub (8 min)
 
 GitHub is where your website's code will live — think of it as a Google Drive for
 code, with a full undo history.
 
 1. Go to [github.com](https://github.com) and click **Sign up** (free). Use an email
    you actually check.
-2. **Connect GitHub to Claude Code** — this lets Claude save your work to GitHub
+2. **Create your website's repository** (the folder on GitHub that will hold your
+   site's code):
+   - Click the **+** in the top-right corner → **New repository**
+   - Name it something like **my-firm-website**
+   - Set visibility to **Private**
+   - Check **"Add a README file"**
+   - Click **Create repository**
+3. **Connect GitHub to Claude Code** — this lets Claude save your work to GitHub
    without you ever typing passwords:
    - In Claude Code, click the **plug icon (⚡)** in the bottom-left corner
    - Find **GitHub** in the list and click **Connect**
    - Follow the prompts to authorize
 
-**✓ Verify you're good to go:** Click the plug icon again — GitHub should show
-as **Connected**.
-
-📝 You do **not** need to create a repository yet. We'll do that together in
-the session.
+**✓ Verify you're good to go:** You can open your repository's page on github.com,
+and clicking the plug icon in Claude Code shows GitHub as **Connected**.
 
 ---
 
-## Step 3 — Vercel (5 min)
+## Step 3 — Vercel (7 min)
 
 Vercel is what publishes your site to the internet. Every change you make goes
 live automatically, usually within a minute.
 
 1. Go to [vercel.com](https://vercel.com) and click **Sign Up**.
 2. Choose **"Continue with GitHub"** — this is important. It links your Vercel and
-   GitHub accounts so deployments happen automatically.
-3. The free **Hobby** plan is all you need.
+   GitHub accounts so deployments happen automatically. The free **Hobby** plan is
+   all you need.
+3. **Create your project:**
+   - Click **Add New → Project**
+   - Find the repository you just created and click **Import**
+   - Leave all the default settings as-is
+   - Click **Deploy**
 
-**✓ Verify you're good to go:** You can log in at vercel.com and see your
-(empty) dashboard.
+Vercel will "deploy" your site — it's just a README file right now, and that's
+exactly right. You'll get a live URL like **my-firm-website.vercel.app**. That's
+your website's address; everything we build in the session will appear there.
 
-📝 You do **not** need to create a project yet. We'll do that together in
-the session.
+**✓ Verify you're good to go:** Your Vercel dashboard shows your project with a
+live URL you can click.
 
 ---
 
@@ -107,9 +117,10 @@ the more you can share, the better your site will be:
 ## Final checklist
 
 - ☐ Claude paid plan (Pro, Max, or Team) and the Claude Code desktop app, signed in
-- ☐ GitHub account created
+- ☐ GitHub account created + repository created (Private, with a README)
 - ☐ GitHub connected to Claude Code (plug icon shows "Connected")
 - ☐ Vercel account created with "Continue with GitHub"
+- ☐ Vercel project deployed — you can see your live `.vercel.app` URL
 - ☐ Skill installed — typing `/hc-firm` shows `/hc-firm-site:build`
 - ☐ Firm details gathered (bios, fees, headshots, URLs)
 
