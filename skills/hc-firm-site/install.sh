@@ -50,17 +50,19 @@ for phase in PHASE_1 PHASE_2 PHASE_3 PHASE_4; do
   fi
 done
 
-# Download the reference guide
+# Download the reference guides
 echo ""
-echo "Downloading reference guide..."
-url="$RAW/reference/LAW_FIRM_WEBSITE_GUIDE.md"
-dest="$BASE/hc-firm-site/LAW_FIRM_WEBSITE_GUIDE.md"
-if curl -sf "$url" -o "$dest"; then
-  echo "  ✓  LAW_FIRM_WEBSITE_GUIDE.md"
-else
-  echo "  ✗  LAW_FIRM_WEBSITE_GUIDE.md — download failed"
-  exit 1
-fi
+echo "Downloading reference guides..."
+for ref in LAW_FIRM_WEBSITE_GUIDE DESIGN_REFERENCES; do
+  url="$RAW/reference/${ref}.md"
+  dest="$BASE/hc-firm-site/${ref}.md"
+  if curl -sf "$url" -o "$dest"; then
+    echo "  ✓  ${ref}.md"
+  else
+    echo "  ✗  ${ref}.md — download failed"
+    exit 1
+  fi
+done
 
 # Install Anthropic's frontend-design skill (official, free) — it makes Claude
 # design websites with a real visual point of view instead of generic AI defaults.

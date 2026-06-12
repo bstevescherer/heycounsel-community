@@ -20,6 +20,7 @@ One command. Four phases. Handles design, SEO, AEO, compliance, accessibility, a
 Also includes:
 - **`reference/LAW_FIRM_WEBSITE_GUIDE.md`** — the complete best-practices reference covering StoryBrand copy, SEO/AEO for law firms, conversion principles, legal disclaimer requirements, WCAG accessibility, and bar advertising rules
 - **`reference/phases/PHASE_1.md`–`PHASE_4.md`** — the four phase playbooks: the exact specs, decisions, success criteria, and known roadblocks for each phase of the build
+- **`reference/DESIGN_REFERENCES.md`** — two curated style directions (Playful & Smart · Modern & Sophisticated) anchored by real law firm sites, so attorneys pick a direction instead of designing from scratch
 - **Anthropic's `frontend-design` skill** — installed automatically; makes Claude design like a boutique studio instead of producing the generic "AI website" look
 - **Sanity's `seo-aeo-best-practices` skill** — installed automatically; a maintained expert reference for SEO, AI answer engines (AEO), and Google's EEAT authority framework, used throughout Phases 2–4
 
@@ -149,6 +150,8 @@ cp reference/phases/*.md ~/.claude/hc-firm-site/phases/
 The build installs and uses two free, expert-maintained skills:
 
 **[Anthropic's `frontend-design` skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design)** — In Phase 1, Claude reads your firm brief, develops 2–3 named design directions (typography, color system, overall feel), and lets you pick. The chosen direction is logged and honored for the rest of the build — so the result looks like *your firm*, not like every other AI-generated website.
+
+Design proposals don't start from a blank page: during intake the attorney picks one of two curated style directions — **Playful & Smart** (Darwin Legal, Likewise Law) or **Modern & Sophisticated** (Crosby, Optimal Counsel, General Counsel, Manifest Law) — and Phase 1 grounds its proposals in that category's reference sites (`reference/DESIGN_REFERENCES.md`). Principles are borrowed, never pixels — and an attorney who wants a different direction entirely can always point at their own references instead.
 
 **[Sanity's `seo-aeo-best-practices` skill](https://github.com/sanity-io/agent-toolkit/tree/main/skills/seo-aeo-best-practices)** — A current, maintained reference covering SEO, AEO (getting cited by AI assistants like ChatGPT and Perplexity), and Google's EEAT authority framework. Where it's used:
 - **Phase 2 (Content):** the EEAT reference shapes how authority is built into the copy — named-attorney attribution, credential-specific bios, first-hand experience in blog posts. Law firms are a textbook EEAT case; this is where rankings are won.

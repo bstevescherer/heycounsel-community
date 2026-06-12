@@ -556,13 +556,57 @@ Wait for the response, then continue.
 
 **Group 5 of 5 — Design and Existing Presence**
 
-Say:
+First, present the two curated style directions. Read
+`$HOME/.claude/hc-firm-site/DESIGN_REFERENCES.md` (if installed) so you can speak to
+them accurately, then show:
 
-"Last group — a few questions about the look and feel:
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Last group — the look and feel
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-1. Do you have any websites you admire visually?
-   These don't have to be law firms — any industry.
-   Share URLs if you can, or just describe what you like about them.
+You don't have to design your site from scratch.
+We've curated two style directions that work for
+modern law firms — take a minute to click through a
+couple of these and see which feels like YOUR firm:
+
+  1 · PLAYFUL, SMART
+      Warm, human, founder-to-founder energy.
+      Serious about the work, not about itself.
+        → darwinlegal.com
+        → likewise.law
+
+  2 · MODERN, SOPHISTICATED
+      Precision and quiet confidence. Reads like a
+      top-tier product company that practices law.
+        → crosby.ai
+        → optimalcounsel.com
+        → general.legal
+        → manifestlaw.com
+
+There's no wrong answer — and if neither fits, you
+can point me at any site you admire instead.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Use AskUserQuestion:
+- Question: "Which style direction feels right for your firm?"
+- Options:
+  - "Playful, smart"
+  - "Modern, sophisticated"
+  - "Somewhere in between — mix them"
+  - "A different direction — I'll describe it"
+
+**If they pick a category (or a mix):** note it for the brief. **If different
+direction:** ask them to describe it or share URLs — their preference always wins
+over the curated defaults.
+
+Then say:
+
+"Great choice. A few more quick ones:
+
+1. Any OTHER websites you admire visually — any industry, not just law?
+   Share URLs or just describe what you like. (Fine to say "none".)
 
 2. Do you have any brand colors, or a color direction you prefer?
    (e.g., "dark and serious", "clean and minimal", "navy and gold", "I have no preference")
@@ -856,7 +900,10 @@ the website build. Claude reads it automatically at the start of every session.*
 
 ## Design Direction
 
-**Visual references:** [URLs or descriptions]
+**Style category:** [Playful & Smart / Modern & Sophisticated / mix / custom — from
+the intake choice. Phase 1 grounds its design proposals in this category's reference
+sites (see DESIGN_REFERENCES.md) unless custom.]
+**Visual references:** [URLs or descriptions — their own admired sites, if any]
 **Color direction:** [their answer]
 **Existing website:** [URL or none]
 **Headshots ready:** [yes / no / some]

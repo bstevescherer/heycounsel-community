@@ -10,6 +10,8 @@ single biggest motivation moment of the build. Get there.
 **Read before building:**
 - `.planning/FIRM_BRIEF.md` — especially the Design Direction section
 - `$HOME/.claude/skills/frontend-design/SKILL.md` — the design skill (if installed)
+- `$HOME/.claude/hc-firm-site/DESIGN_REFERENCES.md` — the curated style categories
+  and reference sites; the brief's chosen style category points into this file
 - `.planning/LAW_FIRM_WEBSITE_GUIDE.md` — Part 4 (conversion: homepage structure, CTA design)
 
 ---
@@ -76,17 +78,26 @@ This is where the site stops being a template and becomes THEIR site.
    if installed, and follow its process: develop a visual thesis grounded in the
    firm's identity, then make deliberate decisions about typography, color, and
    layout. Avoid the recognizable AI-default looks the skill warns about.
-2. **Ground it in the brief.** The Design Direction section of FIRM_BRIEF.md has
+2. **Start from the chosen style category.** The brief's Design Direction section
+   names a style category from `$HOME/.claude/hc-firm-site/DESIGN_REFERENCES.md`
+   (Playful & Smart, Modern & Sophisticated, a mix, or custom). Read that category's
+   section, then use WebFetch to visit 1–2 of its reference sites for fresh detail.
+   Borrow principles — the typographic attitude, palette logic, layout moves — never
+   pixels: no copied copy, no recognizable clone of a reference homepage. If the
+   attorney chose a custom direction, their references replace the curated ones.
+3. **Ground it in the brief.** The Design Direction section of FIRM_BRIEF.md has
    their color preferences, admired sites, and the firm's tone ("formal and precise"
-   vs "approachable and plain-speaking" should produce visibly different designs).
-   If they shared admired-site URLs, fetch and study them.
-3. **Present 2–3 named design directions** to the attorney in plain English. For each:
-   the overall feel, the heading + body font pairing, the color palette (with hex
+   vs "approachable and plain-speaking" should produce visibly different designs —
+   even within the same category). If they shared their own admired-site URLs, fetch
+   and study those too.
+4. **Present 2–3 named design directions** to the attorney in plain English, each a
+   distinct interpretation of their chosen category for THEIR firm. For each: the
+   overall feel, the heading + body font pairing, the color palette (with hex
    swatches described in words — e.g. "deep navy, warm off-white, brass accent"),
    and what kind of firm it signals. Make a recommendation and say why.
-4. Use AskUserQuestion to let them pick (or mix — "direction A but with B's colors"
+5. Use AskUserQuestion to let them pick (or mix — "direction A but with B's colors"
    is a fine answer).
-5. **Record the chosen direction** in `.planning/DECISIONS.md` — future sessions must
+6. **Record the chosen direction** in `.planning/DECISIONS.md` — future sessions must
    honor it.
 
 Then implement it in `src/styles/global.css` using Tailwind v4's `@theme` block:
