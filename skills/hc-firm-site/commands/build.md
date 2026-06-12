@@ -567,22 +567,19 @@ them accurately, then show:
 
 You don't have to design your site from scratch.
 We've curated two style directions that work for
-modern law firms — take a minute to click through a
-couple of these and see which feels like YOUR firm:
+modern law firms — which one feels like YOUR firm?
 
   1 · PLAYFUL, SMART
       Warm, human, founder-to-founder energy.
       Serious about the work, not about itself.
-        → darwinlegal.com
-        → likewise.law
+      Light pages, one friendly accent color, a
+      personal touch — charm that builds trust.
 
   2 · MODERN, SOPHISTICATED
       Precision and quiet confidence. Reads like a
       top-tier product company that practices law.
-        → crosby.ai
-        → optimalcounsel.com
-        → general.legal
-        → manifestlaw.com
+      Disciplined typography, generous space, proof
+      over ornament.
 
 There's no wrong answer — and if neither fits, you
 can point me at any site you admire instead.
