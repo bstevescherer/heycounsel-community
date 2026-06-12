@@ -81,6 +81,32 @@ else
   fi
 fi
 
+# Install Sanity's seo-aeo-best-practices skill (free, general-purpose) — a
+# maintained reference for SEO, AEO (AI answer engines), and Google's EEAT
+# framework. Used in Phases 2-4 of the build for metadata, schema markup,
+# sitemaps, and content authority. Skipped if already installed; non-fatal
+# if the download fails — the build command re-checks later.
+SANITY_SKILLS_RAW="https://raw.githubusercontent.com/sanity-io/agent-toolkit/main/skills/seo-aeo-best-practices"
+echo ""
+echo "Installing Sanity's seo-aeo-best-practices skill..."
+if [ -f "$BASE/skills/seo-aeo-best-practices/SKILL.md" ]; then
+  echo "  ✓  already installed — skipping"
+else
+  mkdir -p "$BASE/skills/seo-aeo-best-practices/references"
+  seo_ok=true
+  curl -sf "$SANITY_SKILLS_RAW/SKILL.md" -o "$BASE/skills/seo-aeo-best-practices/SKILL.md" || seo_ok=false
+  for ref in eeat-principles structured-data technical-seo aeo-considerations; do
+    curl -sf "$SANITY_SKILLS_RAW/references/${ref}.md" -o "$BASE/skills/seo-aeo-best-practices/references/${ref}.md" || seo_ok=false
+  done
+  if [ "$seo_ok" = true ]; then
+    echo "  ✓  seo-aeo-best-practices (from sanity-io/agent-toolkit)"
+  else
+    echo "  ⚠  download failed — not a problem, the build command"
+    echo "     will offer to install it again when you start."
+    rm -rf "$BASE/skills/seo-aeo-best-practices"
+  fi
+fi
+
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  ✓ Installation complete"

@@ -54,6 +54,10 @@ These apply to every step of every phase:
 - **Apply the frontend-design skill** whenever creating or significantly changing
   visual design (Phase 1 design system, Phase 2 pages). Read it from
   `$HOME/.claude/skills/frontend-design/SKILL.md` and follow its process.
+- **Apply the seo-aeo-best-practices skill** whenever writing content or doing SEO
+  work (Phases 2–4). It lives at `$HOME/.claude/skills/seo-aeo-best-practices/` —
+  the SKILL.md is a hub pointing to reference files on EEAT, structured data,
+  technical SEO, and AEO. Read the file relevant to the work at hand.
 - **Errors are teaching moments.** When something fails, explain what the error means
   in plain English first, then fix it.
 </rules>
@@ -276,55 +280,80 @@ Check the output. If successful, show:
 
 ---
 
-## Step 2 — Install the design skill
+## Step 2 — Install the expert skills
 
-Check whether Anthropic's frontend-design skill is already installed:
+The build leans on two free, expert-written skills. Check whether they're installed:
 
 ```bash
-[ -f "$HOME/.claude/skills/frontend-design/SKILL.md" ] && echo "INSTALLED" || echo "MISSING"
+[ -f "$HOME/.claude/skills/frontend-design/SKILL.md" ] && echo "DESIGN: installed" || echo "DESIGN: missing"
+[ -f "$HOME/.claude/skills/seo-aeo-best-practices/SKILL.md" ] && echo "SEO: installed" || echo "SEO: missing"
 ```
 
-**If INSTALLED:** Show `✓ Design skill already installed` and continue to Step 3.
+**If both installed:** Show `✓ Expert skills already installed (design + SEO)` and
+continue to Step 3.
 
-**If MISSING:** Show this message:
+**If either is missing:** Show this message (mention only the missing one(s)):
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  One more tool — the design skill
+  Two more tools — expert skills for Claude
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Before we start, I'd like to install Anthropic's
-frontend-design skill. It's a free, official add-on
-that makes Claude design websites the way a
-professional design studio would.
+Before we start, I'd like to install two free add-on
+"skills" — expert playbooks that upgrade how Claude
+does specific kinds of work:
 
-What it changes:
-  → Without it, AI-built websites tend to look the
-    same — generic layouts, predictable colors, the
-    "obviously made by AI" look.
-  → With it, Claude starts from YOUR firm's identity
-    and builds a deliberate visual direction: real
-    typography choices, an intentional color system,
-    a design with a point of view.
+1. frontend-design (by Anthropic)
+   → Without it, AI-built websites tend to look the
+     same — generic layouts, predictable colors, the
+     "obviously made by AI" look.
+   → With it, Claude starts from YOUR firm's identity
+     and builds a deliberate visual direction: real
+     typography choices, an intentional color system,
+     a design with a point of view.
+   → Used in Phase 1 (your design system) and Phase 2
+     (every page).
 
-It's a single text file that installs into Claude's
-skills folder. Takes two seconds, changes nothing
+2. seo-aeo-best-practices (by Sanity)
+   → A maintained, current reference for getting found:
+     traditional Google search (SEO), AI answer engines
+     like ChatGPT and Perplexity (AEO), and Google's
+     authority framework (called EEAT — Experience,
+     Expertise, Authoritativeness, Trust).
+   → With it, Claude implements your metadata, schema
+     markup, and sitemap from an up-to-date expert
+     checklist instead of from memory.
+   → Used in Phase 2 (content authority), Phase 3
+     (all the SEO work), and Phase 4 (the final audit).
+
+They're just text files that install into Claude's
+skills folder. Takes a few seconds, changes nothing
 else on your computer.
 ```
 
 Use AskUserQuestion:
-- Question: "Install the frontend-design skill?"
-- Options: ["Yes, install it", "Skip it — use Claude's default design instincts"]
+- Question: "Install the expert skills?"
+- Options: ["Yes, install them", "Skip — use Claude's built-in instincts"]
 
-**If yes:** Run:
+**If yes:** Install whichever is missing:
+
 ```bash
+# frontend-design (single file)
 mkdir -p "$HOME/.claude/skills/frontend-design"
 curl -sf "https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md" -o "$HOME/.claude/skills/frontend-design/SKILL.md"
+
+# seo-aeo-best-practices (hub file + four reference docs)
+mkdir -p "$HOME/.claude/skills/seo-aeo-best-practices/references"
+base="https://raw.githubusercontent.com/sanity-io/agent-toolkit/main/skills/seo-aeo-best-practices"
+curl -sf "$base/SKILL.md" -o "$HOME/.claude/skills/seo-aeo-best-practices/SKILL.md"
+for ref in eeat-principles structured-data technical-seo aeo-considerations; do
+  curl -sf "$base/references/${ref}.md" -o "$HOME/.claude/skills/seo-aeo-best-practices/references/${ref}.md"
+done
 ```
 
-Verify it downloaded (file exists and is non-empty). If it worked, show
-`✓ Design skill installed`. If it failed (no internet, GitHub down), say so plainly,
-note that the build can continue without it, and move on.
+Verify the files downloaded (exist and are non-empty). If it worked, show
+`✓ Expert skills installed`. If a download failed (no internet, GitHub down), say so
+plainly, note that the build can continue without it, and move on.
 
 **If skip:** Note their choice and continue. Do not ask again.
 

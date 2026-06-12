@@ -7,6 +7,9 @@ verified by the full audit — and live on the firm's real domain.
 - `.planning/LAW_FIRM_WEBSITE_GUIDE.md` — Part 5 (disclaimers) and the accessibility standards section
 - `.planning/FIRM_BRIEF.md` — Security & Compliance Requirements (this phase closes every item)
 - `$HOME/.claude/commands/hc-firm-site/check.md` — the audit this phase must pass
+- `$HOME/.claude/skills/seo-aeo-best-practices/references/technical-seo.md` (if
+  installed) — cross-check its checklist during step 6; it covers current technical
+  details the static audit may not (canonical URLs, redirect hygiene, crawlability)
 
 ---
 

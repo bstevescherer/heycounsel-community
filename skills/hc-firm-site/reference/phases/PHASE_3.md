@@ -6,6 +6,15 @@ attorney's inbox, and every page is optimized for Google AND for AI answer engin
 
 **Read before building:**
 - `.planning/LAW_FIRM_WEBSITE_GUIDE.md` — Part 2 (SEO), Part 3 (AEO), Part 5 (contact form disclaimer — exact required language)
+- `$HOME/.claude/skills/seo-aeo-best-practices/` (if installed) — read `SKILL.md`,
+  then `references/structured-data.md` before the JSON-LD work, `references/technical-seo.md`
+  before metadata/sitemap work, and `references/aeo-considerations.md` before the FAQ
+  sections. **How the two references divide the work:** the Law Firm Website Guide says
+  what a LAW FIRM site needs (which schema types, disclaimer placement, what clients
+  search for); the seo-aeo skill says how to implement it correctly and currently
+  (metadata patterns, schema syntax, sitemap mechanics, what AI engines actually cite).
+  Where they conflict on technical implementation, the seo-aeo skill wins; where they
+  conflict on law-firm requirements, the guide wins.
 - `.planning/FIRM_BRIEF.md` — Security & Compliance Requirements section
 
 ---

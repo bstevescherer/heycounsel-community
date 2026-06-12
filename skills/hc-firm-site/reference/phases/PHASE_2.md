@@ -8,6 +8,7 @@ per practice area, attorney profiles, and a blog with starter articles.
 - `.planning/FIRM_BRIEF.md` — the team, clients, positioning, and pricing sections drive everything here
 - `.planning/LAW_FIRM_WEBSITE_GUIDE.md` — Part 1 (StoryBrand), Part 4 (conversion + pricing transparency), Part 5 (disclaimers), Part 6 (business-lawyer messaging)
 - `$HOME/.claude/skills/frontend-design/SKILL.md` — apply the established design direction to every new page; do not drift from Phase 1's system
+- `$HOME/.claude/skills/seo-aeo-best-practices/references/eeat-principles.md` (if installed) — Google's EEAT framework; this phase is where authority gets built into the content
 - `.planning/DECISIONS.md` — the chosen design direction and CTA
 
 ---
@@ -92,6 +93,12 @@ so the data is easy to mark up.)
   rewrite it.
 - ONE call to action, everywhere. No "Subscribe," no "Learn more" competing with it.
 - Match the tone from the brief.
+- **Build in EEAT** (per the seo-aeo skill's eeat-principles reference): attorneys are
+  a textbook EEAT case — real credentials, real bar admissions, real experience. Show
+  it: every blog post by a named attorney whose profile proves their expertise; bios
+  with specifics (years, matters handled, admissions) not adjectives; first-hand
+  experience in the writing ("in the formations we handle..." beats generic content).
+  Google and AI engines both rank legal content heavily on demonstrated authority.
 
 ### 7. Images
 
