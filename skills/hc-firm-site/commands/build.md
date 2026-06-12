@@ -49,7 +49,11 @@ These apply to every step of every phase:
 - **Read before building.** At the start of each phase, read the phase playbook, the
   firm brief, and the relevant section of the Law Firm Website Guide. Files:
   - `.planning/FIRM_BRIEF.md` — the firm (created during Setup)
-  - `.planning/LAW_FIRM_WEBSITE_GUIDE.md` — best practices reference
+  - `.planning/LAW_FIRM_WEBSITE_GUIDE.md` — best practices reference (copied into the
+    project during Setup so the repo carries its own reference; if it's missing for
+    any reason, read the installed original at
+    `$HOME/.claude/hc-firm-site/LAW_FIRM_WEBSITE_GUIDE.md` and re-copy it into
+    `.planning/`)
   - `$HOME/.claude/hc-firm-site/phases/PHASE_N.md` — the playbook for phase N
 - **Apply the frontend-design skill** whenever creating or significantly changing
   visual design (Phase 1 design system, Phase 2 pages). Read it from
