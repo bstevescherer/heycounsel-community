@@ -1,30 +1,101 @@
 ---
-name: hc-firm-site:setup
-description: Set up a new firm website project — installs GSD if needed, gathers firm info, and configures Claude for a non-technical attorney
+name: hc-firm-site:build
+description: Build a complete law firm website in four phases — one command from empty folder to launched site. Resumable — run it again anytime and it picks up exactly where you left off.
 allowed-tools:
   - Bash
   - Read
   - Write
+  - Edit
+  - Glob
+  - Grep
   - WebFetch
   - AskUserQuestion
 ---
 
 <objective>
-Prepare everything needed to build a law firm website using the HeyCounsel method.
+Build a complete, production-quality law firm website for a practicing attorney with
+no coding background. This is the ONLY command the attorney needs for the entire build.
 
-This skill runs ONCE before anything else. It:
-1. Verifies GSD is installed (and walks through installation if not)
-2. Asks ~15 intake questions about the firm
-3. Writes FIRM_BRIEF.md — the source of truth for everything that gets built
-4. Copies LAW_FIRM_WEBSITE_GUIDE.md into the project
-5. Writes .claude/CLAUDE.md — configures Claude to communicate at the right level and reference the right documents throughout every session
-6. Ends with the exact command to run next
+The journey:
 
-After this skill completes, run:
-/gsd:new-project --auto @.planning/FIRM_BRIEF.md
+1. **Setup** (first run only) — connect GitHub + Vercel, install the design skill,
+   gather firm information, write the firm brief and project instructions
+2. **Phase 1 — Foundation** — Astro + Tailwind project with a custom design system,
+   deployed live on day one
+3. **Phase 2 — Content** — homepage, practice area pages, attorney profiles, blog
+4. **Phase 3 — Leads + SEO** — contact form, schema markup, sitemap, AI-search optimization
+5. **Phase 4 — Polish + Launch** — accessibility, performance, security, bar compliance, launch
+
+Every phase ends the same way: commit → push → verify the live deploy → show the
+attorney their site → get approval before moving on.
+
+**This command is resumable.** Progress lives in `.planning/PROGRESS.md`. If the
+session ends, the context is cleared, or the attorney hits a usage limit, they just
+run `/hc-firm-site:build` again and the build continues from the first unfinished step.
 </objective>
 
+<rules>
+These apply to every step of every phase:
+
+- **Plain English always.** The attorney has never coded. Explain every command before
+  running it, define every technical term the first time, use real-world analogies.
+- **One thing at a time.** Never dump multiple questions or concepts in one message
+  unless the step explicitly groups them.
+- **Never skip the ship ritual.** Every phase ends with commit → push → live deploy
+  verified → attorney approval. No phase is "done" until the attorney has seen it live
+  and said so.
+- **Update PROGRESS.md immediately** after each milestone — it is the only thing that
+  makes the build survivable across sessions.
+- **Read before building.** At the start of each phase, read the phase playbook, the
+  firm brief, and the relevant section of the Law Firm Website Guide. Files:
+  - `.planning/FIRM_BRIEF.md` — the firm (created during Setup)
+  - `.planning/LAW_FIRM_WEBSITE_GUIDE.md` — best practices reference
+  - `$HOME/.claude/hc-firm-site/phases/PHASE_N.md` — the playbook for phase N
+- **Apply the frontend-design skill** whenever creating or significantly changing
+  visual design (Phase 1 design system, Phase 2 pages). Read it from
+  `$HOME/.claude/skills/frontend-design/SKILL.md` and follow its process.
+- **Errors are teaching moments.** When something fails, explain what the error means
+  in plain English first, then fix it.
+</rules>
+
 <process>
+
+## Step 0 — Where are we?
+
+Before anything else, check for an in-progress build:
+
+```bash
+[ -f ".planning/PROGRESS.md" ] && echo "RESUMING" || echo "FRESH_START"
+```
+
+**If RESUMING:**
+1. Read `.planning/PROGRESS.md`, `.planning/FIRM_BRIEF.md`, and `.claude/CLAUDE.md`
+2. Show a status box like this (fill in real status from PROGRESS.md):
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Welcome back — [Firm Name] website build
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✓ Setup                 complete
+  ✓ Phase 1 — Foundation  complete (site is live!)
+  ▶ Phase 2 — Content     in progress
+  ☐ Phase 3 — Leads + SEO
+  ☐ Phase 4 — Polish + Launch
+
+  Last completed: [most recent checked item]
+  Picking up at:  [first unchecked item]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+3. Confirm with the attorney: "Ready to continue with [next step]?" Then jump directly
+   to that step below. Skip everything already marked complete.
+
+**If FRESH_START:** Continue to Setup, Step 1.
+
+---
+
+# PART ONE — SETUP (first run only)
 
 ## Step 1 — GitHub, Vercel, and connection walkthrough
 
@@ -205,117 +276,61 @@ Check the output. If successful, show:
 
 ---
 
-## Step 2 — Check if GSD is installed
+## Step 2 — Install the design skill
 
-Run this check:
+Check whether Anthropic's frontend-design skill is already installed:
 
 ```bash
-if [ -f "$HOME/.claude/get-shit-done/VERSION" ] && [ -d "$HOME/.claude/commands/gsd" ]; then
-  echo "INSTALLED: $(cat $HOME/.claude/get-shit-done/VERSION)"
-else
-  echo "NOT_INSTALLED"
-fi
+[ -f "$HOME/.claude/skills/frontend-design/SKILL.md" ] && echo "INSTALLED" || echo "MISSING"
 ```
 
-**If output starts with INSTALLED:**
-Show this message and continue to Step 3:
+**If INSTALLED:** Show `✓ Design skill already installed` and continue to Step 3.
 
-```
-✓ GSD is installed (version X.X.X)
-```
-
-**If output is NOT_INSTALLED:**
-Continue to Step 2.
-
----
-
-## Step 3 — Install GSD (only if not installed)
-
-GSD is not installed. Explain it and walk through installation before continuing.
-
-Show this message:
+**If MISSING:** Show this message:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  First: Let's install GSD
+  One more tool — the design skill
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Before we set up your firm website project, we need
-to install a tool called GSD (Get Shit Done).
+Before we start, I'd like to install Anthropic's
+frontend-design skill. It's a free, official add-on
+that makes Claude design websites the way a
+professional design studio would.
 
-GSD is a planning and project management framework
-for Claude Code. Think of it like a project manager
-that lives inside Claude — it helps break the
-website build into organized phases, tracks what's
-been done, and makes sure nothing gets missed.
+What it changes:
+  → Without it, AI-built websites tend to look the
+    same — generic layouts, predictable colors, the
+    "obviously made by AI" look.
+  → With it, Claude starts from YOUR firm's identity
+    and builds a deliberate visual direction: real
+    typography choices, an intentional color system,
+    a design with a point of view.
 
-We'll install it now. It takes about 30 seconds.
+It's a single text file that installs into Claude's
+skills folder. Takes two seconds, changes nothing
+else on your computer.
 ```
 
 Use AskUserQuestion:
-- Question: "Ready to install GSD?"
-- Options: ["Yes, install it", "No, I'll do it later"]
+- Question: "Install the frontend-design skill?"
+- Options: ["Yes, install it", "Skip it — use Claude's default design instincts"]
 
-**If user says no:** Show this and exit:
-```
-No problem. When you're ready, install GSD by running
-this command in your terminal:
-
-  npx -y get-shit-done-cc@latest --global
-
-Then restart Claude Code and run /hc-firm-site:setup again.
-```
-
-**If user says yes:** Run:
+**If yes:** Run:
 ```bash
-npx -y get-shit-done-cc@latest --global
+mkdir -p "$HOME/.claude/skills/frontend-design"
+curl -sf "https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md" -o "$HOME/.claude/skills/frontend-design/SKILL.md"
 ```
 
-After running, verify it worked:
-```bash
-if [ -f "$HOME/.claude/get-shit-done/VERSION" ] && [ -d "$HOME/.claude/commands/gsd" ]; then
-  echo "SUCCESS: $(cat $HOME/.claude/get-shit-done/VERSION)"
-else
-  echo "FAILED"
-fi
-```
+Verify it downloaded (file exists and is non-empty). If it worked, show
+`✓ Design skill installed`. If it failed (no internet, GitHub down), say so plainly,
+note that the build can continue without it, and move on.
 
-**If SUCCESS:** Show this and EXIT — the user MUST restart before continuing:
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  ✓ GSD installed successfully (version X.X.X)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-One more step: fully quit and reopen Claude Code so
-it picks up the new GSD commands.
-
-  → Fully quit Claude Code
-    Mac: press Cmd+Q
-    Windows: right-click the taskbar icon → Quit
-    (just closing the window is not enough)
-  → Reopen Claude Code in your project folder
-  → Run /hc-firm-site:setup again to continue
-
-You only have to do this once.
-```
-
-**If FAILED:** Show this and exit:
-```
-Something went wrong with the GSD installation.
-This sometimes happens if Node.js isn't installed.
-
-Try opening your terminal app (not Claude Code) and running:
-  npx -y get-shit-done-cc@latest --global
-
-If you see an error about "node" or "npm", you may need to
-install Node.js first at: https://nodejs.org (click "LTS Download")
-
-Then restart Claude Code and run /hc-firm-site:setup again.
-```
+**If skip:** Note their choice and continue. Do not ask again.
 
 ---
 
-## Step 4 — Check project state
+## Step 3 — Project folders
 
 Check if this project already has a FIRM_BRIEF.md:
 
@@ -323,20 +338,14 @@ Check if this project already has a FIRM_BRIEF.md:
 [ -f ".planning/FIRM_BRIEF.md" ] && echo "EXISTS" || echo "NEW"
 ```
 
-**If EXISTS:** Use AskUserQuestion:
+**If EXISTS** (but no PROGRESS.md — unusual, probably an old setup): Use AskUserQuestion:
 - Question: "A FIRM_BRIEF.md already exists in this project. What would you like to do?"
-- Options:
-  - "Start fresh — overwrite everything"
-  - "Cancel — keep what I have"
+- Options: ["Keep it — skip the intake questions", "Start fresh — redo the intake"]
 
-If cancel: exit.
-If start fresh: continue to Step 5.
+If keeping: read the existing brief, then skip ahead to Step 7 (write PROGRESS.md).
+If starting fresh: continue.
 
-**If NEW:** Continue to Step 5.
-
----
-
-## Step 5 — Create project folders
+**If NEW:** Create the folders and continue:
 
 ```bash
 mkdir -p .planning
@@ -345,7 +354,7 @@ mkdir -p .claude
 
 ---
 
-## Step 6 — Intake questions
+## Step 4 — Intake questions
 
 Show this message before starting:
 
@@ -532,11 +541,11 @@ Say:
 
 5. Is there anything else about the firm, your clients, or the website that you want Claude to know before we start building?"
 
-Wait for the response, then continue to Step 7.
+Wait for the response, then continue to Step 5.
 
 ---
 
-## Step 7 — Confirm the tech stack
+## Step 5 — Confirm the tech stack
 
 Show this message:
 
@@ -554,7 +563,7 @@ we move on.
 
 One note on the contact form: we'll figure out how
 form submissions get stored and emailed to you when
-GSD reaches that phase of the build. There are several
+we reach Phase 3 of the build. There are several
 good options and the right one depends on what you
 already use to manage client intake.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -735,7 +744,7 @@ Use AskUserQuestion:
 - Options: ["Yes, confirmed", "I have a question about this"]
 
 **If they have a question:** Answer it, then re-confirm before continuing.
-**If yes:** Show this and continue to Step 8:
+**If yes:** Show this and continue to Step 6:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -747,22 +756,22 @@ Use AskUserQuestion:
   GitHub       ✓  version control
   Vercel       ✓  hosting and deployment
 
-  Contact form integration will be decided when GSD
-  reaches that phase — we'll review your options and
-  choose the right one for how you manage intake.
+  Contact form integration will be decided in Phase 3
+  — we'll review your options and choose the right one
+  for how you manage intake.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ---
 
-## Step 8 — Write FIRM_BRIEF.md
+## Step 6 — Write FIRM_BRIEF.md
 
 Using all the answers collected, write `.planning/FIRM_BRIEF.md` in this format:
 
 ```markdown
 # Firm Brief — [Firm Name]
 
-*Generated by /hc-firm-site:setup. This document is the source of truth for
+*Generated by /hc-firm-site:build. This document is the source of truth for
 the website build. Claude reads it automatically at the start of every session.*
 
 ---
@@ -829,17 +838,18 @@ the website build. Claude reads it automatically at the start of every session.*
 
 ## Security & Compliance Requirements
 
-*These are non-negotiable for a law firm website. GSD must include a dedicated
-security phase in the project plan to address each of these before launch.*
+*These are non-negotiable for a law firm website. Phase 4 of the build
+addresses each of these before launch.*
 
 - **HTTP security headers** — configured in `vercel.json`: Content-Security-Policy,
   X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy
 - **Secrets management** — all API keys stored as Vercel environment variables only;
   never hardcoded in source files or committed to git
 - **Git hygiene** — `.env` and `.env.local` files excluded from git via `.gitignore`
-- **Supabase Row Level Security** — RLS enabled on all database tables (including leads)
+- **Database security** — if the contact form uses a database (e.g. Supabase),
+  Row Level Security must be enabled on all tables
 - **Server-side input validation** — contact form validated on the server, not just
-  the browser; malformed submissions rejected before reaching the database
+  the browser; malformed submissions rejected before reaching storage
 - **Spam protection** — honeypot field on the contact form at minimum; rate limiting
   recommended for production
 - **No sensitive data in built output** — verify the compiled `dist/` folder contains
@@ -848,21 +858,13 @@ security phase in the project plan to address each of these before launch.*
   to protect the confidentiality of client communications, including pre-engagement
   inquiries submitted via web forms; the contact form, data storage, and notification
   system must meet this standard
-- **Pre-launch security audit** — run `/hc-firm-site:check` before going live; the
-  Security section of that audit must fully pass
-
----
-
-## Build Notes
-
-*This brief feeds directly into `/gsd:new-project --auto`. GSD will read this
-document and create the full project plan — practice area pages, attorney profiles,
-blog system, contact form, SEO, and security — based on what's here.*
+- **Pre-launch security audit** — Phase 4 runs the full `/hc-firm-site:check` audit;
+  the Security section must fully pass before launch
 ```
 
 ---
 
-## Step 9 — Copy LAW_FIRM_WEBSITE_GUIDE.md into the project
+## Step 7 — Copy LAW_FIRM_WEBSITE_GUIDE.md into the project
 
 Read the guide from the skill's own folder and write it into the project:
 
@@ -874,7 +876,7 @@ If the copy fails for any reason, note it but continue — it's not a blocker.
 
 ---
 
-## Step 10 — Write .claude/CLAUDE.md
+## Step 8 — Write .claude/CLAUDE.md
 
 Write `.claude/CLAUDE.md` with the following content, substituting the firm name and practice areas from the brief:
 
@@ -884,6 +886,11 @@ Write `.claude/CLAUDE.md` with the following content, substituting the firm name
 This project is building a law firm website for [Firm Name], a [practice areas]
 firm based in [city, state]. The person working on this project is a practicing
 attorney with no coding background.
+
+The build is managed by the `/hc-firm-site:build` command — it runs in four
+phases and tracks progress in `.planning/PROGRESS.md`. If the attorney seems
+lost or asks "where were we?", tell them to run `/hc-firm-site:build` again —
+it resumes automatically.
 
 ---
 
@@ -904,6 +911,7 @@ Specifically:
 
 At the beginning of every session, read these files:
 
+- `.planning/PROGRESS.md` — where the build currently stands
 - `.planning/FIRM_BRIEF.md` — the firm's complete profile, team, clients, and positioning
 - `.planning/LAW_FIRM_WEBSITE_GUIDE.md` — best practices for law firm websites (SEO, AEO, conversion, disclaimers, StoryBrand)
 
@@ -911,20 +919,27 @@ Every content, copy, and SEO decision should be consistent with these documents.
 
 ---
 
+## Design
+
+When creating or significantly changing visual design, read and apply the
+frontend-design skill at `~/.claude/skills/frontend-design/SKILL.md` (if installed).
+The site's design direction was chosen with the attorney during Phase 1 — honor it.
+Do not introduce new fonts, colors, or visual styles without asking.
+
+---
+
 ## Tech Stack — Already Decided
 
 Do not suggest alternatives to the core stack:
 
-- **Astro 6** — builds the site
-- **Tailwind CSS v4** — styles it
+- **Astro** — builds the site
+- **Tailwind CSS** — styles it
 - **GitHub** — version control
 - **Vercel** — deployment and hosting
 
-**Contact form integration is TBD.** When GSD reaches
-the contact form phase, present the attorney with their
-options (e.g. Supabase + Resend, Formspree, Netlify Forms,
-direct email via SMTP, CRM webhook). Ask what they currently
-use to manage client intake — the right tool depends on their
+**Contact form integration is decided in Phase 3.** Present the attorney with
+their options (e.g. Web3Forms, Formspree, Supabase + Resend, CRM webhook). Ask
+what they currently use to manage client intake — the right tool depends on their
 existing workflow. Do not assume Supabase or Resend.
 
 ---
@@ -941,14 +956,15 @@ These are not optional and must be implemented on every relevant page:
 - Every blog post attributed to a named attorney
 - No image committed to the repo larger than 200 KB
 - JSON-LD structured data on every page (LegalService, Person, Article as appropriate)
+- One call to action everywhere — don't add competing CTAs
 
-Security requirements (must be addressed in a dedicated security phase):
+Security requirements (addressed in Phase 4 — but never violated earlier):
 
 - HTTP security headers in `vercel.json` (Content-Security-Policy, X-Frame-Options,
   X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
 - All API keys in Vercel environment variables only — never in source code or git
 - `.env` files listed in `.gitignore` — never committed
-- Supabase Row Level Security enabled on all tables
+- If a database is used: Row Level Security enabled on all tables
 - Server-side input validation on all form submissions
 - Honeypot spam protection on the contact form
 - Built output (`dist/`) verified to contain no exposed credentials
@@ -971,12 +987,67 @@ All website copy follows the StoryBrand framework:
 
 When making significant decisions during the build, add an entry to
 `.planning/DECISIONS.md` with: what was decided, why, and the teaching insight.
-This file is course documentation for the HeyCounsel community.
 ```
 
 ---
 
-## Step 11 — Show completion summary
+## Step 9 — Create PROGRESS.md and save your work
+
+Write `.planning/PROGRESS.md`:
+
+```markdown
+# Build Progress — [Firm Name]
+
+*Maintained by /hc-firm-site:build. Claude updates this after every milestone.
+If you ever lose your place, run /hc-firm-site:build — it reads this file and
+resumes automatically.*
+
+**Live site:** [Vercel URL from setup]
+**GitHub repo:** [repo URL from setup]
+
+---
+
+## Milestones
+
+- [x] Setup — accounts connected, firm brief written, project configured
+- [ ] Phase 1 — Foundation *(design system + live deployed shell)*
+- [ ] Phase 2 — Content *(homepage, practice areas, attorneys, blog)*
+- [ ] Phase 3 — Leads + SEO *(contact form, schema, sitemap, AEO)*
+- [ ] Phase 4 — Polish + Launch *(accessibility, performance, security, compliance)*
+
+## Phase Notes
+
+*(Claude: when a phase completes, record the date and any decisions that
+future sessions need to know — e.g. which contact form provider was chosen.)*
+
+- Setup completed: [date]
+```
+
+Then make the first commit. Explain it first:
+
+"I'm going to save everything we just created as the project's first snapshot
+and send it to GitHub — this is called a commit and push. Your planning files
+will be safely backed up before we write any code."
+
+```bash
+git add .planning .claude
+git commit -m "Project setup: firm brief, build instructions, progress tracker"
+git push -u origin main
+```
+
+**Roadblock — if the push is rejected** with a message about the remote containing
+work you don't have: this happens because the GitHub repo was created with a README
+file that doesn't exist locally yet. Explain it simply ("GitHub has one file we don't
+have locally — we'll pull it down first, then push"), then run:
+
+```bash
+git pull origin main --no-rebase --allow-unrelated-histories
+git push -u origin main
+```
+
+---
+
+## Step 10 — Setup complete
 
 Display this message:
 
@@ -985,28 +1056,164 @@ Display this message:
   ✓ Setup complete — [Firm Name]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Files created:
+Files created and backed up to GitHub:
 
   .planning/FIRM_BRIEF.md              ← Your firm's profile
   .planning/LAW_FIRM_WEBSITE_GUIDE.md  ← Best practices reference
+  .planning/PROGRESS.md                ← Build progress tracker
   .claude/CLAUDE.md                    ← Claude's project instructions
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Next step — run this command:
+  What happens next — the four phases
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  /gsd:new-project --auto @.planning/FIRM_BRIEF.md
+  Phase 1 — Foundation     your design system + a live site
+  Phase 2 — Content        every page, written and styled
+  Phase 3 — Leads + SEO    contact form + search optimization
+  Phase 4 — Polish+Launch  accessibility, security, compliance
 
-This tells Claude to read your firm brief and build
-a full project plan — phases, tasks, and success
-criteria — without asking redundant questions.
+Each phase ends with your site updated LIVE on the
+internet, and we don't move on until you've seen it
+and approved it.
 
-After that, you'll run:
-  /gsd:plan-phase 1
-  /gsd:execute-phase 1
+You can stop at any point — close your laptop, hit a
+usage limit, whatever. Run /hc-firm-site:build again
+and we pick up exactly where we left off.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
 
-And the build begins. Run /hc-firm-site:help at any
-time to see all available commands.
+Use AskUserQuestion:
+- Question: "Ready to start Phase 1 now?"
+- Options: ["Yes — let's build", "Not yet — I'll come back later"]
+
+**If later:** Show "No problem. Run /hc-firm-site:build whenever you're ready —
+everything is saved." and stop.
+
+**If yes:** Continue to Part Two, Phase 1.
+
+---
+
+# PART TWO — THE FOUR PHASES
+
+## How every phase runs
+
+Each phase follows the same rhythm. Do not deviate from it:
+
+1. **Read first.** Read the phase playbook (`$HOME/.claude/hc-firm-site/phases/PHASE_N.md`),
+   `.planning/FIRM_BRIEF.md`, `.planning/PROGRESS.md`, and the guide sections the
+   playbook points to. The playbook is the authoritative spec for the phase — follow it.
+2. **Announce the phase.** In plain English: what's being built, what it will look
+   like when done, roughly how long it takes.
+3. **Ask the phase decisions.** Each playbook lists the decisions the attorney must
+   make for that phase. Ask them up front — not scattered mid-build.
+4. **Build.** Work through the playbook's build steps. Explain as you go, but don't
+   ask for permission on things already decided.
+5. **Verify.** Check every success criterion in the playbook. Run the build
+   (`npm run build`) and confirm zero errors. Fix anything that fails before showing
+   the attorney.
+6. **Ship it.** Explain, then run:
+   ```bash
+   git add -A
+   git commit -m "[phase]: [plain description of what was built]"
+   git push
+   ```
+   Wait ~60 seconds for Vercel, then verify the live site is serving the new work
+   (`curl -s -o /dev/null -w "%{http_code}" THEIR_URL` should return 200; spot-check
+   that new content appears). Share the live URL and tell them what to look at.
+7. **Get approval.** Use AskUserQuestion: "Does Phase N look right to you?" with
+   options ["Yes — mark it complete", "I want changes first"]. If they want changes,
+   make them, re-ship, and ask again. Loop until approved.
+8. **Record it.** Mark the phase complete in `.planning/PROGRESS.md` with the date
+   and any decisions made (e.g. chosen contact form provider). Commit and push that
+   update too. Then offer: continue to the next phase now, or stop here (everything
+   is saved).
+
+**Context note:** If the conversation is getting very long at a phase boundary,
+suggest the attorney start fresh: "This is a clean stopping point. If Claude ever
+feels slow or confused, you can clear the conversation and run /hc-firm-site:build —
+it resumes from the progress file with a fresh memory."
+
+---
+
+## Phase 1 — Foundation
+
+**Playbook:** `$HOME/.claude/hc-firm-site/phases/PHASE_1.md`
+
+The goal: an Astro + Tailwind project with a real design system — designed using
+the frontend-design skill and approved by the attorney — deployed live on their
+Vercel URL. The attorney sees their site on the internet today.
+
+Read the playbook and follow the phase rhythm above.
+
+---
+
+## Phase 2 — Content
+
+**Playbook:** `$HOME/.claude/hc-firm-site/phases/PHASE_2.md`
+
+The goal: every page of the site exists with real content — homepage with all
+sections, a dedicated page per practice area, attorney profiles, and a working
+blog with starter articles. All copy follows StoryBrand.
+
+Read the playbook and follow the phase rhythm above.
+
+---
+
+## Phase 3 — Leads + SEO
+
+**Playbook:** `$HOME/.claude/hc-firm-site/phases/PHASE_3.md`
+
+The goal: visitors can contact the firm from any page (with the required
+attorney-client disclaimer), submissions reach the attorney's inbox, and every
+page is optimized for Google and AI answer engines (schema, sitemap, FAQ sections).
+
+This phase opens with the contact form decision — the playbook has the options.
+
+Read the playbook and follow the phase rhythm above.
+
+---
+
+## Phase 4 — Polish + Launch
+
+**Playbook:** `$HOME/.claude/hc-firm-site/phases/PHASE_4.md`
+
+The goal: the site is accessible (WCAG 2.1 AA), fast, secure, and bar-compliant.
+This phase runs the full 16-point `/hc-firm-site:check` audit and walks the
+attorney through connecting their custom domain.
+
+Read the playbook and follow the phase rhythm above.
+
+---
+
+# PART THREE — LAUNCH
+
+When Phase 4 is approved, update PROGRESS.md one final time, then show:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🎉 Your firm website is launched
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Live at: [their URL]
+
+  What you built:
+    ✓ Custom-designed site (no templates)
+    ✓ A page for every practice area
+    ✓ Attorney profiles + blog
+    ✓ Contact form with bar-compliant disclaimers
+    ✓ Full SEO + AI-search optimization
+    ✓ WCAG accessibility, security headers, fast loads
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Keeping it alive
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  /hc-firm-site:page    add a new practice area,
+                        attorney, or blog post anytime
+  /hc-firm-site:check   re-run the full compliance +
+                        SEO audit anytime
+  Or just describe any change in plain English —
+  Claude knows this codebase.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 

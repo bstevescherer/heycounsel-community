@@ -11,44 +11,43 @@ Display the complete hc-firm-site command reference. Output ONLY the reference c
 <reference>
 # HeyCounsel — Firm Website Builder
 
-A set of Claude Code skills for building a professional law firm website using proven best practices for SEO, AEO, conversion, and legal compliance. Designed for attorneys with no coding background.
-
-Built on top of the GSD framework. These skills prepare your context and guide you — GSD handles the actual project planning and execution.
+Build a professional law firm website with Claude Code — no coding background required. Handles design, SEO, AEO, conversion, accessibility, security, and bar compliance by default.
 
 ---
 
 ## How It Works
 
 ```
-/hc-firm-site:setup   →   /gsd:new-project --auto @.planning/FIRM_BRIEF.md   →   /gsd:plan-phase 1   →   /gsd:execute-phase 1
+/hc-firm-site:build
 ```
 
-Run `/hc-firm-site:setup` once before anything else. It gathers your firm's information, creates all the context files, and configures Claude to communicate at the right level for a non-technical attorney. Then GSD takes over for planning and building — with all your firm context already loaded.
+That's the whole workflow. One command walks you through everything:
 
-Use `/hc-firm-site:page` anytime during the build to create a specific page. Use `/hc-firm-site:check` before launch to verify everything is in order.
+- **Setup** — connect GitHub + Vercel, install the design skill, answer questions about your firm
+- **Phase 1 — Foundation** — your custom design system + a live site on day one
+- **Phase 2 — Content** — homepage, practice area pages, attorney profiles, blog
+- **Phase 3 — Leads + SEO** — contact form, structured data, sitemap, AI-search optimization
+- **Phase 4 — Polish + Launch** — accessibility, performance, security, bar compliance, custom domain
+
+Each phase ends with your site updated **live** and your approval before moving on.
+
+**It resumes automatically.** Stop anytime — close your laptop, hit a usage limit, clear the conversation. Run `/hc-firm-site:build` again and it picks up exactly where you left off (progress lives in `.planning/PROGRESS.md`).
 
 ---
 
 ## Commands
 
-### `/hc-firm-site:setup`
-**Run this first — before `/gsd:new-project`.**
+### `/hc-firm-site:build`
+**The only command you need.** Builds the entire site in four phases, from empty folder to launched website. Resumable at any point.
 
-Gathers your firm's information through a short intake conversation, then creates three things:
-- `FIRM_BRIEF.md` — your firm's complete profile (name, location, practice areas, attorneys, target clients, pricing, tone)
-- `LAW_FIRM_WEBSITE_GUIDE.md` — best practices reference covering StoryBrand, SEO/AEO, conversion, and legal disclaimers
-- `.claude/CLAUDE.md` — project configuration that tells Claude to explain technical concepts in plain English and reference your firm's documents automatically throughout every session
-
-Ends with the exact command to run next.
-
-**Usage:** `/hc-firm-site:setup`
+**Usage:** `/hc-firm-site:build`
 
 ---
 
 ### `/hc-firm-site:page [type]`
-**Use during the build when creating specific pages.**
+**Use after launch (or anytime) to add a page.**
 
-Creates a fully structured page for your firm website — practice area page, attorney profile, staff profile, or blog post — with the right content structure, SEO metadata, JSON-LD schema, and legal disclaimers baked in. Reads your `FIRM_BRIEF.md` automatically so the content is specific to your firm, not generic.
+Creates a fully structured page — practice area, attorney profile, staff profile, or blog post — with the right content structure, SEO metadata, JSON-LD schema, and legal disclaimers baked in. Reads your `FIRM_BRIEF.md` automatically so the content is specific to your firm, and matches your existing design.
 
 **Page types:**
 - `practice-area` — Full practice area page with FAQ schema, SEO meta, disclaimer
@@ -67,16 +66,16 @@ Creates a fully structured page for your firm website — practice area page, at
 ---
 
 ### `/hc-firm-site:check`
-**Run before launch.**
+**Runs automatically in Phase 4 — re-run anytime after changes.**
 
-Audits every page of the site and produces a checklist of anything that needs to be fixed before going live. Checks for:
+Audits every page of the site and produces a checklist of anything that needs to be fixed. Checks for:
 - Missing or incomplete legal disclaimers (footer, contact form, blog posts, practice area pages)
 - Missing meta titles or descriptions
 - Missing or incomplete JSON-LD structured data
 - Images over 200 KB
 - Practice area pages missing their own URL
 - Blog posts missing author attribution
-- Contact form missing attorney-client disclaimer
+- HTTP security headers and secrets hygiene
 
 Outputs a clear pass/fail list. Anything that fails includes a plain-English explanation of what's wrong and how to fix it.
 
@@ -91,18 +90,14 @@ Show this reference.
 
 ---
 
-## Files Created by These Skills
+## Files Created by the Build
 
 ```
 .planning/
+├── PROGRESS.md                # Where the build stands — makes everything resumable
 ├── FIRM_BRIEF.md              # Your firm's profile — the source of truth
 ├── LAW_FIRM_WEBSITE_GUIDE.md  # Best practices reference
-├── DECISIONS.md               # Log of decisions made during the build
-└── (GSD files created by /gsd:new-project)
-    ├── PROJECT.md
-    ├── REQUIREMENTS.md
-    ├── ROADMAP.md
-    └── STATE.md
+└── DECISIONS.md               # Log of decisions made during the build
 
 .claude/
 └── CLAUDE.md                  # Project-level instructions for Claude
@@ -110,48 +105,34 @@ Show this reference.
 
 ---
 
-## The Full Workflow
+## Common Situations
 
-**Starting a new firm website:**
+**"I lost my place / Claude seems confused"**
 ```
-/hc-firm-site:setup
-/gsd:new-project --auto @.planning/FIRM_BRIEF.md
-/gsd:plan-phase 1
-/gsd:execute-phase 1
-(repeat plan/execute for each phase)
-/hc-firm-site:check
-/gsd:verify-work
+/hc-firm-site:build
 ```
+It reads PROGRESS.md and resumes.
 
-**Creating a specific page during the build:**
-```
-/hc-firm-site:page practice-area
-```
+**"How do I change something on the live site?"**
+Just describe it in plain English — Claude knows the codebase. Changes go live when committed and pushed.
 
-**Resuming work after a break:**
-```
-/gsd:progress
-```
-
-**Checking where you are:**
-```
-/gsd:progress
-```
+**"What does commit and push mean?"**
+Commit = save a snapshot of your work. Push = send it to GitHub, which automatically publishes it to your live site via Vercel.
 
 ---
 
 ## Stack
 
-These skills assume the following stack — already decided, not up for debate:
-- **Astro 6** — builds the site
-- **Tailwind CSS v4** — styles it
+The build uses this stack — already decided, not up for debate:
+- **Astro** — builds the site
+- **Tailwind CSS** — styles it
 - **GitHub** — version control
-- **Vercel** — deployment
-- **Supabase** — contact form lead storage
-- **Resend** — email notifications
+- **Vercel** — deployment and hosting
+- **frontend-design skill** (Anthropic, official) — makes the design distinctly yours, not AI-generic
+- **Contact form provider** — chosen with you in Phase 3 based on how you manage intake
 
 ---
 
-*HeyCounsel Firm Website Builder — built on the GSD framework*
+*HeyCounsel Firm Website Builder*
 *Based on the Lovable Law build — lovablelaw.com*
 </reference>

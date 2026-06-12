@@ -1,10 +1,10 @@
 # HC Firm Site Builder
 
-**Build a professional law firm website using Claude Code — no coding background required.**
+**Build a professional law firm website using Claude Code — one command, no coding background required.**
 
-This skill set gives attorneys everything they need to build a production-quality firm website from scratch. It was developed during the construction of [Lovable Law](https://lovablelaw.com) — a real, live law firm website built by a practicing attorney with no coding experience in two days using Claude Code.
+This skill gives attorneys everything they need to build a production-quality firm website from scratch. It was developed during the construction of [Lovable Law](https://lovablelaw.com) — a real, live law firm website built by a practicing attorney with no coding experience in two days using Claude Code.
 
-Four commands. One clear workflow. Handles SEO, AEO, compliance, accessibility, and security by default.
+One command. Four phases. Handles design, SEO, AEO, compliance, accessibility, and security by default.
 
 ---
 
@@ -12,36 +12,46 @@ Four commands. One clear workflow. Handles SEO, AEO, compliance, accessibility, 
 
 | Command | Purpose |
 |---------|---------|
-| `/hc-firm-site:setup` | Run once at the start — gathers firm info, writes the firm brief, configures Claude |
-| `/hc-firm-site:page` | Create any page type (practice area, attorney profile, staff, blog post) |
-| `/hc-firm-site:check` | Pre-launch audit — 16 checks across compliance, SEO, security, and images |
+| `/hc-firm-site:build` | **The only command you need.** Builds the entire site in four phases — setup, foundation, content, leads + SEO, launch. Resumes automatically wherever you left off. |
+| `/hc-firm-site:page` | Add any page type after launch (practice area, attorney profile, staff, blog post) |
+| `/hc-firm-site:check` | The 16-point audit across compliance, SEO, security, and images — runs automatically in Phase 4, re-runnable anytime |
 | `/hc-firm-site:help` | Command reference |
 
 Also includes:
 - **`reference/LAW_FIRM_WEBSITE_GUIDE.md`** — the complete best-practices reference covering StoryBrand copy, SEO/AEO for law firms, conversion principles, legal disclaimer requirements, WCAG accessibility, and bar advertising rules
+- **`reference/phases/PHASE_1.md`–`PHASE_4.md`** — the four phase playbooks: the exact specs, decisions, success criteria, and known roadblocks for each phase of the build
+- **Anthropic's `frontend-design` skill** — installed automatically; makes Claude design like a boutique studio instead of producing the generic "AI website" look
 
 ---
 
 ## The Full Workflow
 
 ```
-/hc-firm-site:setup
-  └── Creates FIRM_BRIEF.md, .claude/CLAUDE.md, LAW_FIRM_WEBSITE_GUIDE.md
-
-/gsd:new-project --auto @.planning/FIRM_BRIEF.md
-  └── Creates PROJECT.md, REQUIREMENTS.md, ROADMAP.md
-
-For each build phase:
-  /gsd:discuss-phase 1   → CONTEXT.md  (your decisions for this phase)
-  /gsd:plan-phase 1      → PLAN.md     (step-by-step build instructions)
-  /gsd:execute-phase 1   → Working code
-  /gsd:verify-work       → VERIFICATION.md
-
-Before launch:
-  /hc-firm-site:check    → 16-point audit (pass all before going live)
+/hc-firm-site:build
+│
+├── Setup (first run only)
+│     Connect GitHub + Vercel → install design skill →
+│     intake questions → FIRM_BRIEF.md + CLAUDE.md + PROGRESS.md
+│
+├── Phase 1 — Foundation
+│     Astro + Tailwind + a custom design system you choose
+│     → YOUR SITE IS LIVE on day one
+│
+├── Phase 2 — Content
+│     Homepage, practice area pages, attorney profiles, blog
+│
+├── Phase 3 — Leads + SEO
+│     Contact form (provider chosen with you), schema markup,
+│     sitemap, FAQ sections for AI search
+│
+└── Phase 4 — Polish + Launch
+      Accessibility, performance, security headers,
+      bar compliance audit, custom domain
 ```
 
-These skills sit on top of the [GSD framework](https://github.com/anthropics/get-shit-done). GSD handles project management, phase planning, execution, and verification. The `/hc-firm-site:` skills handle law-firm-specific context, content principles, and compliance requirements.
+Every phase ends the same way: **commit → push → live deploy verified → your approval.** You watch your site get visibly better at every step, and nothing moves forward without your sign-off.
+
+**Resumable by design.** Progress lives in `.planning/PROGRESS.md`. Close your laptop, hit a usage limit, clear the conversation — run `/hc-firm-site:build` again and it continues from the first unfinished step.
 
 ---
 
@@ -53,41 +63,38 @@ The Lovable Law build this skill is based on produced:
 - Practice area pages (one per service, each with its own URL for SEO)
 - Attorney and staff profile pages with JSON-LD Person schema
 - Blog with Markdown-based posts, Article schema, and author attribution
-- Contact modal with Supabase lead storage and Resend email notifications
+- Contact modal with lead delivery to the attorney's inbox
 - Structured data (LegalService, Person, FAQPage, Article) on every relevant page
 - Sitemap and robots.txt
 - HTTP security headers (grade A on securityheaders.com)
 - Honeypot spam protection
-- Supabase Row Level Security
 - WCAG 2.1 AA accessibility (keyboard navigation, skip links, focus management)
 - Bar compliance (attorney-client disclaimer, Attorney Advertising footer)
 
-**Tech stack used:** Astro 6 · Tailwind CSS v4 · Vercel · Supabase · Resend · GitHub
+**Tech stack:** Astro · Tailwind CSS · GitHub · Vercel · contact form provider of your choice (decided in Phase 3)
 
 ---
 
 ## Installation
 
-### Install all four commands at once
+One line, in any terminal:
 
 ```bash
-# From this directory:
-mkdir -p ~/.claude/commands/hc-firm-site
-cp commands/setup.md ~/.claude/commands/hc-firm-site/setup.md
-cp commands/check.md ~/.claude/commands/hc-firm-site/check.md
-cp commands/page.md  ~/.claude/commands/hc-firm-site/page.md
-cp commands/help.md  ~/.claude/commands/hc-firm-site/help.md
-
-# Copy the reference guide to Claude's data folder
-mkdir -p ~/.claude/hc-firm-site
-cp reference/LAW_FIRM_WEBSITE_GUIDE.md ~/.claude/hc-firm-site/LAW_FIRM_WEBSITE_GUIDE.md
+curl -s https://raw.githubusercontent.com/bstevescherer/heycounsel-community/main/skills/hc-firm-site/install.sh | bash
 ```
 
-Or clone this repo and run the install script if one is provided.
+This installs the four commands, the phase playbooks, the reference guide, and Anthropic's frontend-design skill. Then **fully quit and reopen Claude Code** (Mac: Cmd+Q — just closing the window is not enough) so the new commands load.
 
-### Prerequisite: GSD
+Manual install (from this directory):
 
-These skills require the [GSD (Get Shit Done) framework](https://github.com/anthropics/get-shit-done) to be installed. `/hc-firm-site:setup` checks for GSD automatically and walks you through installation if it's missing.
+```bash
+mkdir -p ~/.claude/commands/hc-firm-site ~/.claude/hc-firm-site/phases
+cp commands/*.md ~/.claude/commands/hc-firm-site/
+cp reference/LAW_FIRM_WEBSITE_GUIDE.md ~/.claude/hc-firm-site/
+cp reference/phases/*.md ~/.claude/hc-firm-site/phases/
+```
+
+**No other frameworks required.** Everything the build needs ships with this skill.
 
 ---
 
@@ -96,13 +103,11 @@ These skills require the [GSD (Get Shit Done) framework](https://github.com/anth
 ### Starting a new firm website
 
 1. Create a new project folder and open it in Claude Code
-2. Run `/hc-firm-site:setup` — Claude will ask ~15 questions about your firm
-3. Run `/gsd:new-project --auto @.planning/FIRM_BRIEF.md` to generate the build plan
-4. Work through each phase with `plan-phase` → `execute-phase` → `verify-work`
-5. Use `/hc-firm-site:page` anytime to create specific pages
-6. Run `/hc-firm-site:check` before launch
+2. Run `/hc-firm-site:build`
+3. Follow along — the command walks you through accounts, intake, and all four phases
+4. Stop and resume as many times as you want
 
-### Adding a page to an existing build
+### Adding a page after launch
 
 ```
 /hc-firm-site:page practice-area
@@ -111,22 +116,22 @@ These skills require the [GSD (Get Shit Done) framework](https://github.com/anth
 /hc-firm-site:page blog
 ```
 
-### Pre-launch audit
+### Re-running the audit
 
 ```
 /hc-firm-site:check
 ```
 
-Runs 16 automated checks. Every check must pass before going live.
-
 ---
 
-## What `/hc-firm-site:setup` Creates
+## What the Build Creates in Your Project
 
 ```
 .planning/
+├── PROGRESS.md                ← Where the build stands — makes it resumable
 ├── FIRM_BRIEF.md              ← Your firm's complete profile
-└── LAW_FIRM_WEBSITE_GUIDE.md  ← Best practices reference
+├── LAW_FIRM_WEBSITE_GUIDE.md  ← Best practices reference
+└── DECISIONS.md               ← Decisions made during the build, with reasoning
 
 .claude/
 └── CLAUDE.md                  ← Project configuration for Claude
@@ -138,7 +143,13 @@ Runs 16 automated checks. Every check must pass before going live.
 
 ---
 
-## The Pre-Launch Checklist (`/hc-firm-site:check`)
+## The Design Skill
+
+The build installs and uses [Anthropic's official `frontend-design` skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design). In Phase 1, Claude reads your firm brief, develops 2–3 named design directions (typography, color system, overall feel), and lets you pick. The chosen direction is logged and honored for the rest of the build — so the result looks like *your firm*, not like every other AI-generated website.
+
+---
+
+## The Audit (`/hc-firm-site:check`)
 
 | # | Check | Why It Matters |
 |---|-------|---------------|
@@ -157,7 +168,7 @@ Runs 16 automated checks. Every check must pass before going live.
 | M | Blog post author attribution | Credibility signal for both search engines and AI tools |
 | N | HTTP security headers | Prevents clickjacking, MIME sniffing, and other common attacks |
 | O | No secrets in source code or git | Prevents API key exposure — critical failure if not met |
-| P | Spam protection on contact form | Keeps bots out of your leads database |
+| P | Spam protection on contact form | Keeps bots out of your leads |
 
 ---
 
@@ -174,15 +185,15 @@ The `reference/LAW_FIRM_WEBSITE_GUIDE.md` file included in this skill covers:
 - **Business lawyer-specific guidance** — tone, client naming, what corporate clients actually search for
 - **WCAG 2.1 AA accessibility** — what compliance requires and how to build it in from the start
 
-This document feeds into GSD's planning process via the `--auto` flag on `/gsd:new-project`.
+Claude reads the relevant sections at the start of each build phase.
 
 ---
 
 ## Background
 
-This skill set was developed alongside the construction of **Lovable Law** (lovablelaw.com) — a fictitious but fully functional AI-native law firm website built to demonstrate what's possible. The build was completed in two days by a practicing attorney with no prior coding experience, using Claude Code and the GSD framework.
+This skill was developed alongside the construction of **Lovable Law** (lovablelaw.com) — a fictitious but fully functional AI-native law firm website built to demonstrate what's possible. The build was completed in two days by a practicing attorney with no prior coding experience, using Claude Code.
 
-The skills encode everything learned during that build: the decisions that had to be made, the mistakes that were corrected, and the best practices that produced a fast, secure, compliant, and SEO-optimized result.
+Version 2.0 collapsed the original multi-framework workflow (a separate project-management system plus four commands) into the single `/hc-firm-site:build` command, based on what tripped up attorneys in the first HeyCounsel cohort: framework installation steps, command syntax, runaway phase counts, and losing their place between sessions. The four-phase structure is the one that actually shipped Lovable Law — now encoded directly into the skill.
 
 The full build story is documented in the *How I Built My Firm Website Using Claude Code in 2 Days* course, available through [HeyCounsel](https://heycounsel.com).
 
