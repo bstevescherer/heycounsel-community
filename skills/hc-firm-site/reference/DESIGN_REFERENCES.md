@@ -35,36 +35,45 @@ younger companies that distrust corporate polish.
 ### Reference sites
 
 **[Darwin Legal](https://darwinlegal.com/)** — startup-focused firm with
-evolutionary-theme whimsy. What works:
-- Benefit-led, conversational headlines ("Make legal a competitive advantage,"
-  "Darwin covers legal; you focus on building")
-- Visual playfulness with a system: sticky-note motifs, seedling/rocket icons,
-  even emoji in the footer nav — charm that never undermines credibility
-- Typography with personality: a handwriting accent font + a monospace font
-  layered over a clean base — three distinct type voices, each with a job
-- Soft, educational CTAs ("Find Your Plan") and transparent flat-fee plans
+evolutionary-theme whimsy. What works (visually verified):
+- Palette: white/cream page, deep navy text and footer, post-it yellow and pink
+  sticky notes, soft sky-blue rounded cards, pastel orange/yellow/blue plan cards
+- Visual playfulness with a system: sticky notes carrying hand-doodled stick
+  figures, handwritten margin annotations with arrows ("Is legal an expensive
+  distraction?"), even emoji in the footer nav — charm that never undermines
+  credibility
+- Typography with personality: a handwriting accent font + monospace/small-caps
+  nav layered over a clean base — three distinct type voices, each with a job
+- Benefit-led, conversational headlines ("Make legal a competitive advantage");
+  pill-shaped outline buttons; soft, educational CTAs and transparent flat-fee plans
 
 **[Likewise Law](https://www.likewise.law/)** — "built for founders, by founders."
-What works:
+What works (visually verified):
+- Stark white page, big black Inter headlines, ONE bright green accent doing all
+  the work: the "Hey," in the hero, the underlines beneath section labels, the
+  "Let's chat" pill button. Pale mint cards (#ebfaf1) for testimonials and logo tiles.
 - Radically personal: leads with the founder's own startup journey, not
-  institutional credentials; even mentions his pug. Personality as positioning.
-- Clean Inter typography on white, black text, one bright blue accent (#0099ff),
-  a pale mint section background (#ebfaf1) — playfulness via color and copy,
-  not via visual clutter
-- Streamlined one-narrative homepage: intro → social proof → founder bio →
-  services → contact. Nothing extra.
-- Friction-free conversational CTA ("Let's chat") repeated throughout
+  institutional credentials; founder photo with his pug. Personality as positioning.
+- Credibility displayed HUGE: "$3B in Client Exits" / "$5B in Client Fundraises"
+  as giant numerals, plus quiet gray logo grids (past firms, clients)
+- A single hand-drawn squiggle under the hero — one playful gesture on an
+  otherwise disciplined page
+- Streamlined one-narrative homepage: intro → proof → founder bio → clients →
+  contact. Friction-free conversational CTA ("Let's chat") repeated throughout.
 
 ### Design vocabulary for this category
 - **Type:** a clean geometric/neutral sans for everything, PLUS one personality
   accent — handwritten, serif italic, or monospace — used sparingly (labels,
   annotations, pull-quotes)
-- **Color:** light backgrounds, near-black text, one saturated friendly accent
-  (bright blue, green, coral); optional soft pastel section backgrounds
+- **Color:** light backgrounds, near-black or navy text, one saturated friendly
+  accent (bright green, blue, coral); soft pastel cards or post-it tones for
+  section variety
 - **Copy posture:** first person, contractions, short sentences, the occasional
-  joke; headlines talk to the client like a smart friend
-- **Layout:** generous but not austere; hand-drawn touches, stickers, or icons
-  give it warmth; motion can be bouncy
+  joke; headlines talk to the client like a smart friend; big bold numbers for
+  credibility (deals closed, years, dollars)
+- **Layout:** generous but not austere; ONE or TWO hand-drawn touches (a squiggle,
+  a doodle, a sticky note) give warmth — restraint keeps it smart rather than
+  childish; motion can be bouncy
 
 ---
 
@@ -80,46 +89,65 @@ firms competing against BigLaw on quality and against legal-tech on speed.
 
 ### Reference sites
 
-**[Crosby](https://crosby.ai/)** — "Big Law Quality at AI Speed." What works:
-- SaaS-grade homepage structure: bold hero claim → recognizable client logos →
-  feature breakdown → CTA. Emotional hook first, logical reassurance second.
-- Minimalist hierarchy, lots of whitespace; sophistication signaled by what's absent
-- Confidence through specificity: real client names, technical capability framing
+**[Crosby](https://crosby.ai/)** — "Big Law Quality at AI Speed." What works
+(visually verified):
+- EDITORIAL, not SaaS: a giant high-contrast serif wordmark spanning the full page
+  width like a newspaper masthead, serif display headlines throughout, on a warm
+  cream/ivory ground with black ink and ONE red accent (buttons, blocks)
+- An abstract black ink/smoke art object in the hero — a single piece of art
+  instead of a stock photo or illustration clutter
+- Proof done quietly: a large wall of client logos in muted gray tiles; an
+  index-style list of team first names set large in serif, like a book's table
+  of contents
+- Structure: masthead → claim → logo wall → testimonial → team index → CTA.
+  Emotional hook first, logical reassurance second.
 
 **[Optimal Counsel](https://www.optimalcounsel.com/)** — the disruptor posture.
-What works:
-- Fragmented, punchy headline rhythm ("Lean. Modern. Elite legal counsel.")
-- Dark, moody palette (deep charcoal #201E27 with a cool blue accent) — premium
-  without being corporate
+What works (visually verified):
+- Dark, moody palette confirmed: deep charcoal-navy (#201E27) with pale blue-gray
+  alternate sections — premium without being corporate
+- A type-contrast headline move: "LEAN. MODERN." in grotesque caps followed by
+  "ELITE LEGAL COUNSEL." in serif caps — two voices in one hero
+- Angular, chamfered section edges (notched corners) give it a precise, technical
+  character
 - Social proof with teeth: candid client testimonials that name the BigLaw firms
-  they left
-- Restrained single CTA ("Get in touch")
+  they left; restrained single CTA ("Get in touch")
+- Build-time note: the site reveals content on scroll, so a static fetch or
+  screenshot shows mostly empty dark space — don't mistake that for the design
 
 **[General Counsel](https://general.legal/)** — warm-minimal, metrics-forward.
-What works:
+What works (visually verified):
 - The warm-neutral palette: cream background (#F4F0EC) with near-black ink
   (#211F1C) — softer and more distinctive than pure white/black
+- Fine bronze/gold contour-line generative art flowing across the hero — texture
+  and motion without imagery; the headline's key phrase ("scales like software")
+  highlighted in the same bronze
 - Disciplined two-font system: a modern grotesque (Geist) + its matching
-  monospace for labels and data
-- Proof by numbers: turnaround times, satisfaction metrics, flat fees stated
-  plainly — transparency AS the sophistication
-- Outcome-first headlines ("Don't let legal slow you down")
+  monospace for labels and data; dark pill-shaped CTAs
+- A spec-table hero: turnaround, pricing model, and team quality listed like
+  product specs next to the headline — transparency AS the sophistication
+- Outcome-first headlines ("Outside counsel that scales like software")
 
 **[Manifest Law](https://manifestlaw.com/)** — polished modern brand. Note: this
-site blocks automated readers; attempt WebFetch at build time, and if it fails,
-lean on the other three references in this category.
+site blocks automated readers (Cloudflare); attempt WebFetch at build time, and
+if it fails, lean on the other three references in this category.
 
 ### Design vocabulary for this category
-- **Type:** one excellent modern grotesque (Geist, Inter, Söhne-alikes) across a
-  strong size scale — huge confident display headlines, small precise labels;
-  optional matching monospace for eyebrows/data; serif only if the brief leans
-  editorial
-- **Color:** either warm-minimal (cream + ink + one deep accent) or dark-premium
-  (charcoal + off-white + one cool accent). Never more than one accent.
+- **Type:** two proven flavors — (a) PRODUCT-MODERN: one excellent grotesque
+  (Geist, Inter, Söhne-alikes) across a strong size scale, optional matching
+  monospace for eyebrows/data; or (b) EDITORIAL: a high-contrast serif for
+  masthead-scale display (Crosby-style), grotesque for everything else. Type
+  contrast between serif and sans in the same lockup is a legitimate signature
+  move (Optimal).
+- **Color:** either warm-minimal (cream + ink + one accent — red or bronze both
+  proven) or dark-premium (charcoal + off-white + one cool accent). Never more
+  than one accent.
 - **Copy posture:** short declarative sentences; specifics over adjectives
-  (metrics, fees, turnaround); zero exclamation marks
-- **Layout:** strict grid, generous whitespace, restrained motion (fades, not
-  bounces); logos/testimonials as proof blocks
+  (metrics, fees, turnaround — even formatted as a spec table); zero exclamation
+  marks
+- **Layout:** strict grid, generous whitespace, restrained motion (fades and
+  scroll-reveals, not bounces); logos/testimonials as quiet proof blocks; one
+  piece of abstract art or generative texture beats any stock photo
 
 ---
 
