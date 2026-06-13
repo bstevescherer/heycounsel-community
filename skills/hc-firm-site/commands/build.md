@@ -62,6 +62,14 @@ These apply to every step of every phase:
   work (Phases 2–4). It lives at `$HOME/.claude/skills/seo-aeo-best-practices/` —
   the SKILL.md is a hub pointing to reference files on EEAT, structured data,
   technical SEO, and AEO. Read the file relevant to the work at hand.
+- **Apply the stop-slop skill to EVERY piece of copy written for the site** —
+  homepage sections, practice area pages, attorney bios, blog posts, FAQ answers,
+  meta descriptions, the footer, the contact form. It lives at
+  `$HOME/.claude/skills/stop-slop/`; read `SKILL.md` plus `references/phrases.md`
+  and `references/structures.md` once per phase and apply on every draft. The
+  skill scores prose on a 50-point rubric — anything under 35/50 should be revised
+  before showing the attorney. This is non-negotiable: it's the difference between
+  "obviously AI" and copy that sounds like the attorney wrote it themselves.
 - **Errors are teaching moments.** When something fails, explain what the error means
   in plain English first, then fix it.
 </rules>
@@ -286,26 +294,27 @@ Check the output. If successful, show:
 
 ## Step 2 — Install the expert skills
 
-The build leans on two free, expert-written skills. Check whether they're installed:
+The build leans on three free, expert-written skills. Check whether they're installed:
 
 ```bash
 [ -f "$HOME/.claude/skills/frontend-design/SKILL.md" ] && echo "DESIGN: installed" || echo "DESIGN: missing"
 [ -f "$HOME/.claude/skills/seo-aeo-best-practices/SKILL.md" ] && echo "SEO: installed" || echo "SEO: missing"
+[ -f "$HOME/.claude/skills/stop-slop/SKILL.md" ] && echo "COPY: installed" || echo "COPY: missing"
 ```
 
-**If both installed:** Show `✓ Expert skills already installed (design + SEO)` and
+**If all installed:** Show `✓ Expert skills already installed (design + SEO + copy)` and
 continue to Step 3.
 
-**If either is missing:** Show this message (mention only the missing one(s)):
+**If any is missing:** Show this message (mention only the missing one(s)):
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Two more tools — expert skills for Claude
+  Three more tools — expert skills for Claude
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Before we start, I'd like to install two free add-on
-"skills" — expert playbooks that upgrade how Claude
-does specific kinds of work:
+Before we start, I'd like to install three free
+add-on "skills" — expert playbooks that upgrade how
+Claude does specific kinds of work:
 
 1. frontend-design (by Anthropic)
    → Without it, AI-built websites tend to look the
@@ -330,6 +339,17 @@ does specific kinds of work:
    → Used in Phase 2 (content authority), Phase 3
      (all the SEO work), and Phase 4 (the final audit).
 
+3. stop-slop (by Hardik Pandya)
+   → Strips the predictable AI tells out of your copy
+     — the throat-clearing openers, the "not just X
+     but Y" rhythm, the em-dash overuse, the empty
+     intensifiers. The stuff that makes readers think
+     "this was clearly written by ChatGPT."
+   → With it, every line on your site sounds like a
+     person — short, direct, distinctively yours.
+   → Used in Phase 2 (all page copy + blog) and
+     Phase 3 (FAQ answers, meta descriptions).
+
 They're just text files that install into Claude's
 skills folder. Takes a few seconds, changes nothing
 else on your computer.
@@ -352,6 +372,14 @@ base="https://raw.githubusercontent.com/sanity-io/agent-toolkit/main/skills/seo-
 curl -sf "$base/SKILL.md" -o "$HOME/.claude/skills/seo-aeo-best-practices/SKILL.md"
 for ref in eeat-principles structured-data technical-seo aeo-considerations; do
   curl -sf "$base/references/${ref}.md" -o "$HOME/.claude/skills/seo-aeo-best-practices/references/${ref}.md"
+done
+
+# stop-slop (hub file + three reference docs)
+mkdir -p "$HOME/.claude/skills/stop-slop/references"
+slop_base="https://raw.githubusercontent.com/hardikpandya/stop-slop/main"
+curl -sf "$slop_base/SKILL.md" -o "$HOME/.claude/skills/stop-slop/SKILL.md"
+for ref in phrases structures examples; do
+  curl -sf "$slop_base/references/${ref}.md" -o "$HOME/.claude/skills/stop-slop/references/${ref}.md"
 done
 ```
 
@@ -1057,6 +1085,15 @@ All website copy follows the StoryBrand framework:
 - Lead with the client's problem, not the firm's credentials
 - Position the firm as the guide with a clear plan
 - Every section has one job: move the visitor toward getting in touch
+
+**Every line of copy passes through the stop-slop skill at
+`~/.claude/skills/stop-slop/` before going on the site.** Read its phrases.md
+and structures.md, then strip the AI tells from every draft: throat-clearing
+openers ("In today's fast-paced world"), business clichés ("synergy,"
+"leverage," "robust"), the "not just X but Y" rhythm, em-dash overuse, empty
+intensifiers ("very," "really," "incredibly"), wh-starters. Target the skill's
+35+/50 score. If a sentence wouldn't survive in an attorney's actual client
+email, rewrite it.
 
 ---
 

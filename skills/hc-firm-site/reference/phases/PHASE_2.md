@@ -9,6 +9,7 @@ per practice area, attorney profiles, and a blog with starter articles.
 - `.planning/LAW_FIRM_WEBSITE_GUIDE.md` — Part 1 (StoryBrand), Part 4 (conversion + pricing transparency), Part 5 (disclaimers), Part 6 (business-lawyer messaging)
 - `$HOME/.claude/skills/frontend-design/SKILL.md` — apply the established design direction to every new page; do not drift from Phase 1's system
 - `$HOME/.claude/skills/seo-aeo-best-practices/references/eeat-principles.md` (if installed) — Google's EEAT framework; this phase is where authority gets built into the content
+- `$HOME/.claude/skills/stop-slop/SKILL.md` and `references/phrases.md` and `references/structures.md` (if installed) — the AI-tell remover; this is the phase where every line of copy gets written, so read these once at the start and apply on every draft
 - `.planning/DECISIONS.md` — the chosen design direction and CTA
 
 ---
@@ -93,6 +94,15 @@ so the data is easy to mark up.)
   rewrite it.
 - ONE call to action, everywhere. No "Subscribe," no "Learn more" competing with it.
 - Match the tone from the brief.
+- **Run every draft through the stop-slop skill before showing the attorney.**
+  Read `~/.claude/skills/stop-slop/SKILL.md` + `references/phrases.md` + `references/structures.md`
+  once at the start of this phase. On every piece of copy — hero, services, pricing,
+  about, attorney bios, blog posts, every microcopy line — strip the AI tells:
+  throat-clearing openers, business clichés ("leverage," "synergy," "robust,"
+  "seamlessly"), the "not just X but Y" rhythm, "in today's fast-paced world,"
+  empty intensifiers, em-dash overuse, wh-starters, passive voice where active works.
+  The skill scores on a 50-point rubric; aim for 35+. If a sentence wouldn't survive
+  in an actual client email from this attorney, rewrite it.
 - **Build in EEAT** (per the seo-aeo skill's eeat-principles reference): attorneys are
   a textbook EEAT case — real credentials, real bar admissions, real experience. Show
   it: every blog post by a named attorney whose profile proves their expertise; bios

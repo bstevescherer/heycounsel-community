@@ -130,6 +130,7 @@ The build uses this stack — already decided, not up for debate:
 - **Vercel** — deployment and hosting
 - **frontend-design skill** (Anthropic, official) — makes the design distinctly yours, not AI-generic
 - **seo-aeo-best-practices skill** (Sanity) — expert reference for SEO, AI-search optimization, and Google's EEAT framework
+- **stop-slop skill** (Hardik Pandya) — removes AI writing patterns from every piece of copy on your site
 - **Contact form provider** — chosen with you in Phase 3 based on how you manage intake
 
 ---
