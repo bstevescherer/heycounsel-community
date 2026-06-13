@@ -15,6 +15,9 @@ attorney's inbox, and every page is optimized for Google AND for AI answer engin
   (metadata patterns, schema syntax, sitemap mechanics, what AI engines actually cite).
   Where they conflict on technical implementation, the seo-aeo skill wins; where they
   conflict on law-firm requirements, the guide wins.
+- `$HOME/.claude/skills/stop-slop/references/phrases.md` (if installed) — every
+  FAQ answer and meta description is a piece of copy too; run them through the
+  same AI-tell filter as Phase 2 content
 - `.planning/FIRM_BRIEF.md` — Security & Compliance Requirements section
 
 ---

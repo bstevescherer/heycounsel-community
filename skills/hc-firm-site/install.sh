@@ -83,6 +83,30 @@ else
   fi
 fi
 
+# Install Hardik Pandya's stop-slop skill (free, MIT) — strips AI-tell phrases
+# and structures from prose. Used in Phases 2-3 when writing every line of copy
+# on the site. Skipped if already installed; non-fatal on download failure.
+STOP_SLOP_RAW="https://raw.githubusercontent.com/hardikpandya/stop-slop/main"
+echo ""
+echo "Installing the stop-slop skill (AI writing-pattern remover)..."
+if [ -f "$BASE/skills/stop-slop/SKILL.md" ]; then
+  echo "  ✓  already installed — skipping"
+else
+  mkdir -p "$BASE/skills/stop-slop/references"
+  slop_ok=true
+  curl -sf "$STOP_SLOP_RAW/SKILL.md" -o "$BASE/skills/stop-slop/SKILL.md" || slop_ok=false
+  for ref in phrases structures examples; do
+    curl -sf "$STOP_SLOP_RAW/references/${ref}.md" -o "$BASE/skills/stop-slop/references/${ref}.md" || slop_ok=false
+  done
+  if [ "$slop_ok" = true ]; then
+    echo "  ✓  stop-slop (from hardikpandya/stop-slop)"
+  else
+    echo "  ⚠  download failed — not a problem, the build command"
+    echo "     will offer to install it again when you start."
+    rm -rf "$BASE/skills/stop-slop"
+  fi
+fi
+
 # Install Sanity's seo-aeo-best-practices skill (free, general-purpose) — a
 # maintained reference for SEO, AEO (AI answer engines), and Google's EEAT
 # framework. Used in Phases 2-4 of the build for metadata, schema markup,
