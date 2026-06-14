@@ -25,10 +25,11 @@ per practice area, attorney profiles, and a blog with starter articles.
    and what their clients search for (guide Part 6 has patterns like "what should I
    ask before signing X"). Let them adjust the list. Each article must be attributed
    to a named attorney from the brief.
-3. **Headshots.** If the brief says headshots are ready, ask the attorney to drop
-   them into the project folder (explain where) — compress anything over 200 KB
-   before committing. If not ready, use tasteful initial-based placeholders sized
-   correctly so real photos can swap in later with zero layout changes.
+3. **Attorney details + headshots.** Intake collected the count of attorneys and the
+   lead attorney's name only. For every additional attorney, the brief has a
+   "TBD — collect in Phase 2" placeholder. You'll collect those details (and headshot
+   files) at the moment you build each attorney's profile page in build step 4 —
+   one attorney at a time. Don't ask for everything up front.
 
 ---
 
@@ -72,10 +73,33 @@ one page — each area is its own Google landing page. Each page includes:
 
 ### 4. Attorney profile pages
 
-One page per attorney from the brief: headshot, name, title, bar admission,
-education, focus areas, background written in the firm's voice, contact info,
-and the CTA. (JSON-LD Person schema is added in Phase 3 — structure the page
-so the data is easy to mark up.)
+One page per attorney listed in FIRM_BRIEF.md (the brief notes the total count and
+which attorneys still need their details collected).
+
+**Before building each profile, fill in any TBD details from the brief.** For
+attorneys whose entry says "TBD — collect in Phase 2," ask the attorney now —
+one attorney at a time, not all at once:
+
+> "Before I build [Name]'s profile page, I need a few details:
+>   • Title (e.g., Partner, Senior Associate)
+>   • Bar admission (state + year)
+>   • Areas of focus
+>   • A 2–4 sentence background or what they're known for
+>   • Education (optional — say 'skip' if not on the site)"
+
+Update FIRM_BRIEF.md with the answers as you collect them, then build that profile.
+Repeat per attorney.
+
+Each profile page contains: headshot (or placeholder), name, title, bar admission,
+focus areas, background written in the firm's voice, education (if provided),
+contact info, and the CTA. JSON-LD Person schema is added in Phase 3 — structure
+the page so the data is easy to mark up.
+
+**Headshots:** ask the attorney now whether photos are ready — "Yes / No / Some."
+For ones available, have them place the files in the project folder (give them the
+exact path) and verify each is under 200 KB before committing. For ones not ready,
+use tasteful initial-based placeholders sized correctly so real photos swap in later
+with zero layout changes.
 
 ### 5. Blog via Astro Content Collections
 
