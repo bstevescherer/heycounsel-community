@@ -504,16 +504,14 @@ Ask each group conversationally — output the question as a normal message and 
 
 Say (skip any items you already pulled from their URLs):
 
-"Let's start with the basics. Please answer these questions about your firm:
+"Let's start with the basics:
 
 1. What is your firm's full name?
 2. What city and state is the firm based in?
 3. What are your primary practice areas? List all of them.
-   (Examples: Corporate Law, M&A, Contracts, Employment, Regulatory, Real Estate, IP, etc.)
-4. Do you have a tagline or short description of what makes your firm different?
-   (If not, just say "none" — we can develop this together)
+   (Examples: Corporate Law, M&A, Contracts, Employment, Real Estate, IP, etc.)
 
-You can answer as a numbered list or just talk through them however is easiest."
+Numbered list or freeform — whichever is easiest."
 
 Wait for the response, then continue.
 
@@ -521,23 +519,26 @@ Wait for the response, then continue.
 
 **Group 2 of 5 — The Team**
 
-Say:
+If you prefilled attorneys from URLs earlier, lead with what you found:
+"I found these attorneys on your site: [Name 1], [Name 2]. Anyone else who'll be
+featured? Let me know if any of those names should be corrected."
 
-"Now tell me about your team. For each attorney, please share:
+Otherwise, ask the three short questions below:
 
-- Full name and title (e.g., Managing Partner, Senior Associate)
-- Bar admission (state and year, e.g., "New York State Bar, 2015")
-- Areas of focus within the firm
-- Education (law school + undergraduate, if you want it on the site)
-- A few sentences about their background or what they're known for
+"A few quick ones about the team:
 
-For any non-attorney staff you want featured on the site (e.g., operations, intake, paralegal):
-- Full name and title
-- A brief description of their role
+1. How many attorneys total will be featured on the site? (Just you = 1)
+2. Your name and role for the site? (e.g., 'Sarah Smith, Managing Partner')
+3. Any non-attorney staff to feature — paralegal, operations, intake? (Names + roles,
+   or just say 'none'.)
 
-If it's just you for now, that's completely fine — just describe yourself."
+Don't worry about bar admission, focus areas, or bios right now — I'll ask for those
+when we build each attorney's profile page in Phase 2. Easier to do one at a time
+than dump everything now."
 
-Wait for the response, then continue.
+Wait for the response. Record the attorney count so Phase 2 knows how many profile
+pages to create. The lead attorney's name is the only attorney detail strictly needed
+for Phase 1. Other attorneys can be placeholders for now (FIRM_BRIEF.md notes this).
 
 ---
 
@@ -553,10 +554,7 @@ Say:
 2. What is the main legal problem they come to you to solve?
 
 3. What do your clients typically worry about before hiring a lawyer?
-   (e.g., cost surprises, slow response times, getting passed to junior associates)
-
-4. How do clients usually find you right now?
-   (referrals, LinkedIn, former colleagues, etc.)"
+   (e.g., cost surprises, slow response times, getting passed to junior associates)"
 
 Wait for the response, then continue.
 
@@ -566,16 +564,14 @@ Wait for the response, then continue.
 
 Say:
 
-"A few questions about how you position the firm:
+"Two quick ones on how you position the firm:
 
 1. Do you offer flat fees, hourly billing, or both?
    If flat fees: what are some examples with prices?
    (e.g., "LLC formation $1,500", "contract review from $750")
    If hourly: what is your rate or range?
 
-2. What do you do differently from other firms your clients might consider?
-
-3. How would you describe the firm's tone and personality?
+2. How would you describe the firm's tone and personality?
    (e.g., "formal and precise", "direct and no-nonsense", "approachable and plain-speaking")"
 
 Wait for the response, then continue.
@@ -630,20 +626,13 @@ Then say:
 
 "Great choice. A few more quick ones:
 
-1. Any OTHER websites you admire visually — any industry, not just law?
-   Share URLs or just describe what you like. (Fine to say "none".)
+One last optional one — any other sites you admire visually (any industry — share
+URLs or just describe what you like), or a color direction you prefer (e.g. 'dark
+and serious', 'navy and gold')? Totally fine to say 'skip' — the style you picked
+above is enough to start designing from."
 
-2. Do you have any brand colors, or a color direction you prefer?
-   (e.g., "dark and serious", "clean and minimal", "navy and gold", "I have no preference")
-
-3. Do you have an existing website? If yes, what is the URL?
-
-4. Do you have professional headshots ready for the attorneys?
-   (Yes / No / Some of them)
-
-5. Is there anything else about the firm, your clients, or the website that you want Claude to know before we start building?"
-
-Wait for the response, then continue to Step 5.
+Wait for the response, then continue to Step 5. Headshots will be requested in
+Phase 2 when attorney profile pages are built.
 
 ---
 
@@ -883,24 +872,29 @@ the website build. Claude reads it automatically at the start of every session.*
 **Name:** [firm name]
 **Location:** [city, state]
 **Practice Areas:** [list]
-**Tagline / Differentiator:** [their answer or "to be developed"]
 
 ---
 
 ## The Team
 
+**Total attorneys on the site:** [number]
+
 ### Attorneys
 
-[For each attorney:]
+[For each attorney whose details ARE known so far — at minimum, the lead attorney:]
 **[Name]** — [Title]
-- Bar: [bar admission]
-- Focus: [areas of focus]
-- Education: [education]
-- Background: [background notes]
+- Bar: [bar admission OR "TBD — collect in Phase 2"]
+- Focus: [focus areas OR "TBD"]
+- Bio: [background notes OR "TBD"]
+- Education: [education OR omit if not provided]
+
+[For placeholder attorneys whose details will be collected in Phase 2:]
+**Attorney 2** — *details TBD; collect in Phase 2 when building profile page*
+**Attorney 3** — *details TBD; collect in Phase 2 when building profile page*
 
 ### Staff
 
-[For each non-attorney staff member:]
+[For each non-attorney staff member, or "None listed":]
 **[Name]** — [Title]
 - Role: [description]
 
@@ -911,14 +905,12 @@ the website build. Claude reads it automatically at the start of every session.*
 **Ideal client:** [their description]
 **Primary problem they solve:** [their answer]
 **Client fears / objections:** [their answer]
-**How clients currently find the firm:** [their answer]
 
 ---
 
 ## Positioning
 
 **Fee structure:** [flat / hourly / both + specifics]
-**Key differentiator:** [their answer]
 **Tone and personality:** [their answer]
 
 ---
@@ -928,10 +920,8 @@ the website build. Claude reads it automatically at the start of every session.*
 **Style category:** [Playful & Smart / Modern & Sophisticated / mix / custom — from
 the intake choice. Phase 1 grounds its design proposals in this category's reference
 sites (see DESIGN_REFERENCES.md) unless custom.]
-**Visual references:** [URLs or descriptions — their own admired sites, if any]
-**Color direction:** [their answer]
-**Existing website:** [URL or none]
-**Headshots ready:** [yes / no / some]
+**Other visual references:** [URLs or descriptions the attorney shared, or "none"]
+**Color direction:** [their answer, or "no preference"]
 
 ---
 
